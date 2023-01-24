@@ -20,7 +20,7 @@ function AllGames({horns}) {
     function AllTheGames() {
         return (
             scores.games.map((game) => {
-                console.log(game)
+                // console.log(game)
                 return (
                     <OneGame horns={horns} game={game} />
                 )
