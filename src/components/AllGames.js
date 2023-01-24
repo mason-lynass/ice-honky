@@ -1,7 +1,7 @@
 import OneGame from "./OneGame"
 import { useState, useEffect } from "react"
 
-function AllGames() {
+function AllGames({horns}) {
 
     const [scores, setScores] = useState({})
     const [scoresLoaded, setScoresLoaded] = useState(false)
@@ -22,7 +22,7 @@ function AllGames() {
             scores.games.map((game) => {
                 console.log(game)
                 return (
-                    <OneGame game={game} />
+                    <OneGame horns={horns} game={game} />
                 )
             })
         )
