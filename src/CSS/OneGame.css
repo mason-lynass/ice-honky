@@ -1,0 +1,17 @@
+.oneGame {
+    border: 2px solid black;
+    border-radius: 30px;
+    width: 800px;
+    margin: 20px auto;
+}
+
+.infoFlex {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+
+}
+
+.awayTeamInfo, .homeTeamInfo {
+    width: 300px;
+}

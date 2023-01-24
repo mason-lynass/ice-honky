@@ -1,4 +1,4 @@
-import './App.css';
+import './CSS/App.css';
 // import OneGame from './components/OneGame';
 import AllGames from './components/AllGames';
 // import { useState, useEffect } from "react"
@@ -18,9 +18,8 @@ function App() {
       <header>
         <h1>Ice Honky</h1>
       </header>
-      <div>
+      <div id="AllGames">
         <AllGames horns={horns}/>
-        <h2>hello</h2>
       </div>
     </div>
   );
