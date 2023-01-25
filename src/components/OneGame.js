@@ -77,7 +77,7 @@ function OneGame({ game, horns }) {
 
         <div className="OGCenter">
           <p>{time} PST</p>
-          <h4>{Object.values(game.status)}</h4>
+          <h4>{Object.values(game.status.state)}</h4>
           <h1 className="gameScore">
             {Object.values(scoreArray)[0]} - {Object.values(scoreArray)[1]}
           </h1>
