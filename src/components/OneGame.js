@@ -35,7 +35,7 @@ function OneGame({ game, horns, logos }) {
     return goals.map((goal) => {
       //   console.log(goal.scorer.player);
       return (
-        <p>
+        <p className="oneGoal">
           {goal.scorer.player} ({goal.scorer.seasonTotal}) - P{goal.period}-{goal.min}:{goal.sec}
         </p>
       );
@@ -66,13 +66,13 @@ function OneGame({ game, horns, logos }) {
   function displayProgress(game) {
     if (game.status.progress) {
       return (
-        <p>
+        <p className="gameProgress">
           {game.status.progress.currentPeriodOrdinal} -{" "}
           {game.status.progress.currentPeriodTimeRemaining.pretty}
         </p>
       );
     } else {
-      return <p></p>;
+      return <p className="gameProgress">{time} PST</p>;
     }
   }
 
@@ -91,12 +91,12 @@ function OneGame({ game, horns, logos }) {
           <p className="awayRecord">
             {awayRecord[0]}-{awayRecord[1]}-{awayRecord[2]}
           </p>
-          <div>{teamGoals(awayGoals)}</div>
+          <div className="oneTeamGoals">{teamGoals(awayGoals)}</div>
         </div>
 
         <div className="OGCenter">
-          <p>{time} PST</p>
-          <h4>{Object.values(game.status.state)}</h4>
+          {/* <p>{time} PST</p> */}
+          <h4 className="gameStatus">{Object.values(game.status.state)}</h4>
           {displayProgress(game)}
           <h1 className="gameScore">
             {Object.values(scoreArray)[0]} - {Object.values(scoreArray)[1]}
@@ -114,7 +114,7 @@ function OneGame({ game, horns, logos }) {
           <p className="homeRecord">
             {homeRecord[0]}-{homeRecord[1]}-{homeRecord[2]}
           </p>
-          <div>{teamGoals(homeGoals)}</div>
+          <div className="oneTeamGoals">{teamGoals(homeGoals)}</div>
         </div>
       </div>
 
