@@ -9,21 +9,41 @@
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-around;
-
 }
 
 .awayTeamInfo, .homeTeamInfo {
     width: 300px;
 }
 
-.awayTeamName {
+.awayTeamName, .homeTeamName {
     margin-bottom: 0;
 }
 
 .awayLogo, .homeLogo {
-    width: 60px;
+    width: 100px;
 }
 
 .awayRecord, .homeRecord {
     margin: 0;
+}
+
+.oneTeamGoals {
+    margin: 20px 0;
+}
+
+.oneGoal {
+    margin: 2px;
+    font-size: 14px;
+}
+
+.gameStatus {
+    margin: 10px;
+}
+
+.gameProgress {
+    margin: 5px;
+}
+
+.gameScore {
+    font-size: 50px;
 }
