@@ -15,3 +15,15 @@
 .awayTeamInfo, .homeTeamInfo {
     width: 300px;
 }
+
+.awayTeamName {
+    margin-bottom: 0;
+}
+
+.awayLogo, .homeLogo {
+    width: 60px;
+}
+
+.awayRecord, .homeRecord {
+    margin: 0;
+}
