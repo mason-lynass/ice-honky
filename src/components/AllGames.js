@@ -1,12 +1,13 @@
 import OneGame from "./OneGame"
 import { useState, useEffect } from "react"
 
-function AllGames({ horns }) {
+function AllGames({ horns, logos, setCurrentPage }) {
 
     const [scores, setScores] = useState({})
     const [scoresLoaded, setScoresLoaded] = useState(false)
 
     useEffect(() => {
+        setCurrentPage("home")
         fetch("https://nhl-score-api.herokuapp.com/api/scores/latest").then((r) => {
             if (r.ok) {
                 r.json().then((scores) => {
@@ -18,12 +19,7 @@ function AllGames({ horns }) {
     }, [])
 
     // this is like an import up there ^^, just importing the whole folder of logos 
-  function importAll(r) {
-    let logos = {};
-    r.keys().forEach((item, index) => { logos[item.replace('./', '').replace('.svg', '')] = r(item) })
-    return logos
-  }
-  const logos = importAll(require.context('../logos', false, /\.svg$/))
+
 
     function AllTheGames() {
         return (

@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom"
-import { useState } from "react"
 
-function NavBar() {
 
-    const [currentPage, setCurrentPage] = useState("home")
+function NavBar( {currentPage, setCurrentPage} ) {
+
+
 
     function renderPage() {
         if (currentPage === "horns") {
             return (
                 <>
-                    <Link to="/" onClick={(e) => setCurrentPage("home")}>
+                    <Link to="/">
                         Main
                     </Link>
                 </>
@@ -18,7 +18,7 @@ function NavBar() {
         if (currentPage === "home") {
             return (
                 <>
-                    <Link to='/horns' onClick={(e) => setCurrentPage("horns")}>
+                    <Link to='/horns'>
                         Horns
                     </Link>
                 </>
