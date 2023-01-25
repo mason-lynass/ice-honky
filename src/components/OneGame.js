@@ -42,7 +42,7 @@ function OneGame({ game, horns, logos }) {
     });
   }
 
-  console.log(game);
+  // console.log(game);
 
   //
   const [awayHorn] = useSound(horns[game.teams.away.abbreviation]);
