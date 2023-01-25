@@ -33,10 +33,16 @@ function OneGame({ game, horns, logos }) {
 
   function teamGoals(goals) {
     return goals.map((goal) => {
-    //   console.log(goal.scorer.player);
-      return <p>{goal.scorer.player} ({goal.scorer.seasonTotal})</p>;
+      //   console.log(goal.scorer.player);
+      return (
+        <p>
+          {goal.scorer.player} ({goal.scorer.seasonTotal}) - P{goal.period}-{goal.min}:{goal.sec}
+        </p>
+      );
     });
   }
+
+  console.log(game);
 
   //
   const [awayHorn] = useSound(horns[game.teams.away.abbreviation]);
@@ -50,18 +56,24 @@ function OneGame({ game, horns, logos }) {
   // score,
   // goals,
 
-  const logosArray = Object.entries(logos)
-//   .filter((logo) => logo.keys === game.teams.away.abbreviation)
-
-//   console.log(Object.values(logos)[0])
-console.log(logosArray)
+  const logosArray = Object.entries(logos);
 
   function findLogo(team) {
-    console.log(team)
-    const logo = logosArray.filter((logo) => logo[0] === team)
-    console.log(logo)
+    const logo = logosArray.filter((logo) => logo[0] === team);
+    return logo[0][1];
+  }
 
-    return (logo[0][1])
+  function displayProgress(game) {
+    if (game.status.progress) {
+      return (
+        <p>
+          {game.status.progress.currentPeriodOrdinal} -{" "}
+          {game.status.progress.currentPeriodTimeRemaining.pretty}
+        </p>
+      );
+    } else {
+      return <p></p>;
+    }
   }
 
   return (
@@ -72,8 +84,11 @@ console.log(logosArray)
             {game.teams.away.locationName} {game.teams.away.teamName}
           </h2>
           {/* <img src={Object.values(logos)[0]} className="awayLogo" /> */}
-          <img src={findLogo(game.teams.away.abbreviation)} className="awayLogo" />
-          <p>
+          <img
+            src={findLogo(game.teams.away.abbreviation)}
+            className="awayLogo"
+          />
+          <p className="awayRecord">
             {awayRecord[0]}-{awayRecord[1]}-{awayRecord[2]}
           </p>
           <div>{teamGoals(awayGoals)}</div>
@@ -82,6 +97,7 @@ console.log(logosArray)
         <div className="OGCenter">
           <p>{time} PST</p>
           <h4>{Object.values(game.status.state)}</h4>
+          {displayProgress(game)}
           <h1 className="gameScore">
             {Object.values(scoreArray)[0]} - {Object.values(scoreArray)[1]}
           </h1>
@@ -91,8 +107,11 @@ console.log(logosArray)
           <h2 className="awayTeamName">
             {game.teams.home.locationName} {game.teams.home.teamName}
           </h2>
-          <img src={findLogo(game.teams.home.abbreviation)} className="homeLogo" />
-          <p>
+          <img
+            src={findLogo(game.teams.home.abbreviation)}
+            className="homeLogo"
+          />
+          <p className="homeRecord">
             {homeRecord[0]}-{homeRecord[1]}-{homeRecord[2]}
           </p>
           <div>{teamGoals(homeGoals)}</div>
