@@ -17,12 +17,20 @@ function AllGames({horns}) {
         })
     }, [])
 
+    // this is like an import up there ^^, just importing the whole folder of logos 
+  function importAll(r) {
+    let logos = {};
+    r.keys().forEach((item, index) => { logos[item.replace('./', '').replace('.svg', '')] = r(item) })
+    return logos
+  }
+  const logos = importAll(require.context('../logos', false, /\.svg$/))
+
     function AllTheGames() {
         return (
             scores.games.map((game) => {
                 // console.log(game)
                 return (
-                    <OneGame horns={horns} game={game} />
+                    <OneGame horns={horns} game={game} logos={logos}/>
                 )
             })
         )
