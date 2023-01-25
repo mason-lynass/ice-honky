@@ -1,7 +1,7 @@
 import OneGame from "./OneGame"
 import { useState, useEffect } from "react"
 
-function AllGames({horns}) {
+function AllGames({ horns }) {
 
     const [scores, setScores] = useState({})
     const [scoresLoaded, setScoresLoaded] = useState(false)
@@ -34,12 +34,19 @@ function AllGames({horns}) {
                 )
             })
         )
-        
+
     }
 
     return (
-        (scoresLoaded === true ) ?
-        AllTheGames() : <h2>loading...</h2>
+        <>
+            <header>
+                <h1>Ice Honky</h1>
+            </header>
+            <div id="AllGames">
+                {(scoresLoaded === true) ?
+                    AllTheGames() : <h2>loading...</h2>}
+            </div>
+        </>
     )
 }
 
