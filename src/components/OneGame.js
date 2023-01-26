@@ -5,7 +5,7 @@ import AllGames from "./AllGames";
 function OneGame({ game, horns, logos }) {
   // score
   const scoreArray = game.scores;
-
+  
   // to access team records
   const recordsObject = game.currentStats.records;
   const awayRecordObject = Object.entries(recordsObject)[0][1];

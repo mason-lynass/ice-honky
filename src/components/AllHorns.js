@@ -2,9 +2,9 @@ import HornButton from "./HornButton"
 import "../CSS/HornButton.css";
 
 function AllHorns({ horns, logos, setCurrentPage }) {
+    setCurrentPage("horns")
 
     function renderButtons() {
-        setCurrentPage("horns")
         return (
             Object.entries(logos).map((logo) => {
                 return (
