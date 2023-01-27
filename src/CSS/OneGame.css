@@ -27,17 +27,6 @@
     margin: 0;
 }
 
-.oneTeamGoals {
-    margin: 20px 0;
-    width: 240px;
-}
-
-.oneGoal {
-    margin: 2px;
-    font-size: 14px;
-    height: 15px;
-}
-
 .gameStatus {
     margin: 10px;
 }
@@ -48,6 +37,18 @@
 
 .gameScore {
     font-size: 50px;
+    margin: 20px auto;
+}
+
+.oneTeamGoals {
+    margin: 20px 0;
+    width: 240px;
+}
+
+.oneGoal {
+    margin: 2px;
+    font-size: 14px;
+    height: 15px;
 }
 
 .gameGoals {
