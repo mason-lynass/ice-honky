@@ -29,11 +29,13 @@
 
 .oneTeamGoals {
     margin: 20px 0;
+    width: 240px;
 }
 
 .oneGoal {
     margin: 2px;
     font-size: 14px;
+    height: 15px;
 }
 
 .gameStatus {
@@ -46,4 +48,16 @@
 
 .gameScore {
     font-size: 50px;
+}
+
+.gameGoals {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+hr {
+    margin: 10px;
+    color: black;
 }

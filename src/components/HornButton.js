@@ -6,11 +6,11 @@ function HornButton({ logo, horn }) {
     const [soundHorn] = useSound(horn)
 
     return (
-        <div class="button-div" onClick={soundHorn}>
-            <button class="button-82-pushable" role="button">
-                <span class="button-82-shadow"></span>
-                <span class="button-82-edge"></span>
-                <span class="button-82-front text">
+        <div className="button-div" onClick={soundHorn}>
+            <button className="button-82-pushable" role="button">
+                <span className="button-82-shadow"></span>
+                <span className="button-82-edge"></span>
+                <span className="button-82-front text">
                     <img className="logo" src={logo} />
                 </span>
             </button> 

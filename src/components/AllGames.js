@@ -1,37 +1,37 @@
 import OneGame from "./OneGame"
 import { useState, useEffect } from "react"
-import ANAhorn from "../audio/mp3s/ANA.mp3"
-import ARIhorn from "../audio/mp3s/ARI.mp3"
-import BOShorn from "../audio/mp3s/BOS.mp3"
-import BUFhorn from "../audio/mp3s/BUF.mp3"
-import CARhorn from "../audio/mp3s/CAR.mp3"
-import CBJhorn from "../audio/mp3s/CBJ.mp3"
-import CGYhorn from "../audio/mp3s/CGY.mp3"
-import CHIhorn from "../audio/mp3s/CHI.mp3"
-import COLhorn from "../audio/mp3s/COL.mp3"
-import DALhorn from "../audio/mp3s/DAL.mp3"
-import DEThorn from "../audio/mp3s/DET.mp3"
-import EDMhorn from "../audio/mp3s/EDM.mp3"
-import FLAhorn from "../audio/mp3s/FLA.mp3"
-import LAKhorn from "../audio/mp3s/LAK.mp3"
-import MINhorn from "../audio/mp3s/MIN.mp3"
-import MTLhorn from "../audio/mp3s/MTL.mp3"
-import NJDhorn from "../audio/mp3s/NJD.mp3"
-import NSHhorn from "../audio/mp3s/NSH.mp3"
-import NYIhorn from "../audio/mp3s/NYI.mp3"
-import NYRhorn from "../audio/mp3s/NYR.mp3"
-import OTThorn from "../audio/mp3s/OTT.mp3"
-import PHIhorn from "../audio/mp3s/PHI.mp3"
-import PIThorn from "../audio/mp3s/PIT.mp3"
-import SEAhorn from "../audio/mp3s/SEA.mp3"
-import SJShorn from "../audio/mp3s/SJS.mp3"
-import STLhorn from "../audio/mp3s/STL.mp3"
-import TBLhorn from "../audio/mp3s/TBL.mp3"
-import TORhorn from "../audio/mp3s/TOR.mp3"
-import VANhorn from "../audio/mp3s/VAN.mp3"
-import VGKhorn from "../audio/mp3s/VGK.mp3"
-import WPGhorn from "../audio/mp3s/WPG.mp3"
-import WSHhorn from "../audio/mp3s/WSH.mp3"
+// import ANA from "../audio/mp3s/ANA.mp3"
+// import ARI from "../audio/mp3s/ARI.mp3"
+// import BOS from "../audio/mp3s/BOS.mp3"
+// import BUF from "../audio/mp3s/BUF.mp3"
+// import CAR from "../audio/mp3s/CAR.mp3"
+// import CBJ from "../audio/mp3s/CBJ.mp3"
+// import CGY from "../audio/mp3s/CGY.mp3"
+// import CHI from "../audio/mp3s/CHI.mp3"
+// import COL from "../audio/mp3s/COL.mp3"
+// import DAL from "../audio/mp3s/DAL.mp3"
+// import DET from "../audio/mp3s/DET.mp3"
+// import EDM from "../audio/mp3s/EDM.mp3"
+// import FLA from "../audio/mp3s/FLA.mp3"
+// import LAK from "../audio/mp3s/LAK.mp3"
+// import MIN from "../audio/mp3s/MIN.mp3"
+// import MTL from "../audio/mp3s/MTL.mp3"
+// import NJD from "../audio/mp3s/NJD.mp3"
+// import NSH from "../audio/mp3s/NSH.mp3"
+// import NYI from "../audio/mp3s/NYI.mp3"
+// import NYR from "../audio/mp3s/NYR.mp3"
+// import OTT from "../audio/mp3s/OTT.mp3"
+// import PHI from "../audio/mp3s/PHI.mp3"
+// import PIT from "../audio/mp3s/PIT.mp3"
+// import SEA from "../audio/mp3s/SEA.mp3"
+// import SJS from "../audio/mp3s/SJS.mp3"
+// import STL from "../audio/mp3s/STL.mp3"
+// import TBL from "../audio/mp3s/TBL.mp3"
+// import TOR from "../audio/mp3s/TOR.mp3"
+// import VAN from "../audio/mp3s/VAN.mp3"
+// import VGK from "../audio/mp3s/VGK.mp3"
+// import WPG from "../audio/mp3s/WPG.mp3"
+// import WSH from "../audio/mp3s/WSH.mp3"
 
 function AllGames({ horns, logos, setCurrentPage }) {
 
@@ -39,43 +39,51 @@ function AllGames({ horns, logos, setCurrentPage }) {
     const [scoresLoaded, setScoresLoaded] = useState(false)
 
     setCurrentPage("home")
-    
+
+    // console.log(ANA)
+    // console.log(Object.values(horns)[0])
+    // console.log(Object.entries(horns).filter((horn) => horn[0] === "ANA")[0][0])
+
     function soundTeamHorn(abb) {
-        if (abb === 'ANA') return new Audio(ANAhorn).play()
-        if (abb === 'ARI') return new Audio(ARIhorn).play()
-        if (abb === 'BOS') return new Audio(BOShorn).play()
-        if (abb === 'BUF') return new Audio(BUFhorn).play()
-        if (abb === 'CAR') return new Audio(CARhorn).play()
-        if (abb === 'CBJ') return new Audio(CBJhorn).play()
-        if (abb === 'CGY') return new Audio(CGYhorn).play()
-        if (abb === 'CHI') return new Audio(CHIhorn).play()
-        if (abb === 'COL') return new Audio(COLhorn).play()
-        if (abb === 'DAL') return new Audio(DALhorn).play()
-        if (abb === 'DET') return new Audio(DEThorn).play()
-        if (abb === 'EDM') return new Audio(EDMhorn).play()
-        if (abb === 'FLA') return new Audio(FLAhorn).play()
-        if (abb === 'LAK') return new Audio(LAKhorn).play()
-        if (abb === 'MIN') return new Audio(MINhorn).play()
-        if (abb === 'MTL') return new Audio(MTLhorn).play()
-        if (abb === 'NJD') return new Audio(NJDhorn).play()
-        if (abb === 'NSH') return new Audio(NSHhorn).play()
-        if (abb === 'NYI') return new Audio(NYIhorn).play()
-        if (abb === 'NYR') return new Audio(NYRhorn).play()
-        if (abb === 'OTT') return new Audio(OTThorn).play()
-        if (abb === 'PHI') return new Audio(PHIhorn).play()
-        if (abb === 'PIT') return new Audio(PIThorn).play()
-        if (abb === 'SEA') return new Audio(SEAhorn).play()
-        if (abb === 'SJS') return new Audio(SJShorn).play()
-        if (abb === 'STL') return new Audio(STLhorn).play()
-        if (abb === 'TBL') return new Audio(TBLhorn).play()
-        if (abb === 'TOR') return new Audio(TORhorn).play()
-        if (abb === 'VAN') return new Audio(VANhorn).play()
-        if (abb === 'VGK') return new Audio(VGKhorn).play()
-        if (abb === 'WPG') return new Audio(WPGhorn).play()
-        if (abb === 'WSH') return new Audio(WSHhorn).play()
+        
+        const teamHornArray = Object.entries(horns).filter((horn) => horn[0] === abb)
+        // console.log(teamHornArray)
+        return new Audio(teamHornArray[0][1]).play()
+        // if (abb === 'ANA') return new Audio(ANA).play()
+        // if (abb === 'ARI') return new Audio(ARI).play()
+        // if (abb === 'BOS') return new Audio(BOS).play()
+        // if (abb === 'BUF') return new Audio(BUF).play()
+        // if (abb === 'CAR') return new Audio(CAR).play()
+        // if (abb === 'CBJ') return new Audio(CBJ).play()
+        // if (abb === 'CGY') return new Audio(CGY).play()
+        // if (abb === 'CHI') return new Audio(CHI).play()
+        // if (abb === 'COL') return new Audio(COL).play()
+        // if (abb === 'DAL') return new Audio(DAL).play()
+        // if (abb === 'DET') return new Audio(DET).play()
+        // if (abb === 'EDM') return new Audio(EDM).play()
+        // if (abb === 'FLA') return new Audio(FLA).play()
+        // if (abb === 'LAK') return new Audio(LAK).play()
+        // if (abb === 'MIN') return new Audio(MIN).play()
+        // if (abb === 'MTL') return new Audio(MTL).play()
+        // if (abb === 'NJD') return new Audio(NJD).play()
+        // if (abb === 'NSH') return new Audio(NSH).play()
+        // if (abb === 'NYI') return new Audio(NYI).play()
+        // if (abb === 'NYR') return new Audio(NYR).play()
+        // if (abb === 'OTT') return new Audio(OTT).play()
+        // if (abb === 'PHI') return new Audio(PHI).play()
+        // if (abb === 'PIT') return new Audio(PIT).play()
+        // if (abb === 'SEA') return new Audio(SEA).play()
+        // if (abb === 'SJS') return new Audio(SJS).play()
+        // if (abb === 'STL') return new Audio(STL).play()
+        // if (abb === 'TBL') return new Audio(TBL).play()
+        // if (abb === 'TOR') return new Audio(TOR).play()
+        // if (abb === 'VAN') return new Audio(VAN).play()
+        // if (abb === 'VGK') return new Audio(VGK).play()
+        // if (abb === 'WPG') return new Audio(WPG).play()
+        // if (abb === 'WSH') return new Audio(WSH).play()
     }
 
-    // intial fetch -- no buzzer sounds -- set up an object of all the current goals, so we know when to toot a horn
+    // initial fetch -- no buzzer sounds -- set up an object of all the current goals, so we know when to toot a horn
     let goalsObject = {}
     useEffect(() => {
         fetch("https://nhl-score-api.herokuapp.com/api/scores/latest").then((r) => {
@@ -91,6 +99,7 @@ function AllGames({ horns, logos, setCurrentPage }) {
                         console.log(Object.keys(game.scores)[0])
                     })
                     console.log('initial fetch!')
+                    console.log(goalsObject)
                 })
             }
         })
@@ -112,9 +121,11 @@ function AllGames({ horns, logos, setCurrentPage }) {
                     console.log("additional fetch!")
 
                     let updateObject = {}
-                    //create updateObject to comapare to the goalsObject. if a team has a different score, toot their horn
+                    //create updateObject to compare to the goalsObject. if a team has a different score, toot their horn
                     scores.games.map((game) => {
+                        // away
                         updateObject[Object.keys(game.scores)[0]] = Object.values(game.scores)[0]
+                        // home
                         updateObject[Object.keys(game.scores)[1]] = Object.values(game.scores)[1]
                     })
 
@@ -142,7 +153,8 @@ function AllGames({ horns, logos, setCurrentPage }) {
                 })
             }
         })
-        setTimeout(refresh, 30 * 1000)
+        // mason made this really long
+        setTimeout(refresh, 6000 * 1000)
     }
 
     function AllTheGames() {

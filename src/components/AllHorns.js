@@ -11,6 +11,7 @@ function AllHorns({ horns, logos, setCurrentPage }) {
                     <HornButton
                         logo={logo[1]}
                         horn={horns[logo[0]]}
+                        key={logo[0]}
                     />
                 )
             })
@@ -19,7 +20,7 @@ function AllHorns({ horns, logos, setCurrentPage }) {
 
     return (
         <>
-            <div class="all-buttons-div">
+            <div className="all-buttons-div">
                 {renderButtons()}
             </div>
         </>
