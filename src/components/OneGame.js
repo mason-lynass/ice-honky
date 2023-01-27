@@ -18,44 +18,55 @@ function OneGame({ game, horns, logos }) {
     const event = new Date(game.startTime).toTimeString();
     const time = event.slice(0, 5);
 
-
     // this is how the goals show up in two split columns
     const allGoals = game.goals;
     let awayGoals = [];
     let homeGoals = [];
 
     for (let i = 0; i < allGoals.length; i++) {
-        awayGoals.push(allGoals[i]);
-        homeGoals.push(allGoals[i]);
+      awayGoals.push(allGoals[i]);
+      homeGoals.push(allGoals[i]);
     }
 
     function teamGoals(goals, team) {
-        return goals.map((goal) => {
-            //   console.log(goal);
+      return goals.map((goal) => {
 
-            let second = goal.sec
-            if (second.toString().length === 1) {
-                second = `0${goal.sec}`
-            } else {
-                second = goal.sec
-            }
+        let second = goal.sec
+        // catch for SO goals
+        if (goal.sec === undefined) {
+          second = ``
+          // catch for goals that happen at xx:0x
+        }  if (second.toString().length === 1) {
+          second = `0${goal.sec}`
+        }
 
-            let period = goal.period
-            if (period === 1 || period === 2 || period === 3) {
-                period = `P${goal.period}`
-            } else { period = goal.period }
+        let min = goal.min
+        let time = `-${min}:${second}`
 
-            if (goal.team === team) {
-                return (
-                    <p className="oneGoal">
-                        {goal.scorer.player} ({goal.scorer.seasonTotal}) - {goal.period}-{goal.min}:{second}
-                    </p>
-                )
-            } else return (<p className="oneGoal"></p>)
-        });
+        let period = goal.period
+        if (period === 1 || period === 2 || period === 3) {
+          period = `P${goal.period}`
+        }
+
+        let seasonTotal = `(${goal.scorer.seasonTotal})`
+        // simplifying text of SO goals
+        if (period === `SO`) {
+          seasonTotal = ``
+          time = ``
+          min = ``
+        }
+
+        if (goal.team === team) {
+          return (
+            <p className="oneGoal">
+              {goal.scorer.player} {seasonTotal} - {goal.period}{time}
+            </p>
+          )
+        } else return (<p className="oneGoal"></p>)
+      });
     }
 
-    //
+    // don't think we're using these
     const [awayHorn] = useSound(horns[game.teams.away.abbreviation]);
     const [homeHorn] = useSound(horns[game.teams.home.abbreviation]);
 
@@ -68,59 +79,56 @@ function OneGame({ game, horns, logos }) {
     const logosArray = Object.entries(logos);
 
     function findLogo(team) {
-        const logo = logosArray.filter((logo) => logo[0] === team);
-        return logo[0][1];
+      const logo = logosArray.filter((logo) => logo[0] === team);
+      return logo[0][1];
     }
 
     function displayProgress(game) {
-        console.log(game)
-        if (game.status.progress) {
-            return (
-                <p className="gameProgress">
-                    {game.status.progress.currentPeriodOrdinal} -{" "}
-                    {game.status.progress.currentPeriodTimeRemaining.pretty}
-                </p>
-            );
-        } else if (game.status.state === "FINAL") {
-            return <p className="gameProgress"></p>
-        } else {
-            return <p className="gameProgress">{time} PST</p>;
-        }
+      if (game.status.progress) {
+        return (
+          <p className="gameProgress">
+            {game.status.progress.currentPeriodOrdinal} -{" "}
+            {game.status.progress.currentPeriodTimeRemaining.pretty}
+          </p>
+        );
+      } else if (game.status.state === "FINAL") {
+        return <p className="gameProgress"></p>
+      } else {
+        return <p className="gameProgress">{time} PST</p>;
+      }
     }
 
     function gameGoals() {
-
-        return (
-            <div className="gameGoals">
-                <div className="oneTeamGoals">
-                    {teamGoals(awayGoals, game.teams.away.abbreviation)}
-                </div>
-                <hr></hr>
-                <div className="oneTeamGoals">
-                    {teamGoals(homeGoals, game.teams.home.abbreviation)}
-                </div>
-            </div>
-        )
+      return (
+        <div className="gameGoals">
+          <div className="oneTeamGoals">
+            {teamGoals(awayGoals, game.teams.away.abbreviation)}
+          </div>
+          <hr></hr>
+          <div className="oneTeamGoals">
+            {teamGoals(homeGoals, game.teams.home.abbreviation)}
+          </div>
+        </div>
+      )
     }
 
     return (
-        <div className="oneGame">
-            <div className="infoFlex">
-                <div className="awayTeamInfo">
-                    <h2 className="awayTeamName">
-                        {game.teams.away.locationName} {game.teams.away.teamName}
-                    </h2>
-                    {/* <img src={Object.values(logos)[0]} className="awayLogo" /> */}
-                    <img
-                        src={findLogo(game.teams.away.abbreviation)}
-                        className="awayLogo"
-                        alt='away team logo'
-                    />
-                    <p className="awayRecord">
-                        {awayRecord[0]}-{awayRecord[1]}-{awayRecord[2]}
-                    </p>
-                    {/* <div className="oneTeamGoals">{teamGoals(awayGoals)}</div> */}
-                </div>
+      <div className="oneGame">
+        <div className="infoFlex">
+          <div className="awayTeamInfo">
+            <h2 className="awayTeamName">
+              {game.teams.away.locationName} {game.teams.away.teamName}
+            </h2>
+            {/* <img src={Object.values(logos)[0]} className="awayLogo" /> */}
+            <img
+              src={findLogo(game.teams.away.abbreviation)}
+              className="awayLogo" alt='away team logo'
+            />
+            <p className="awayRecord">
+              {awayRecord[0]}-{awayRecord[1]}-{awayRecord[2]}
+            </p>
+            {/* <div className="oneTeamGoals">{teamGoals(awayGoals)}</div> */}
+          </div>
 
                 <div className="OGCenter">
                     {/* <p>{time} PST</p> */}
@@ -155,6 +163,7 @@ function OneGame({ game, horns, logos }) {
             </div>
         </div>
     );
+
 }
 
 export default OneGame;

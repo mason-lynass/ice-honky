@@ -2,15 +2,16 @@ import HornButton from "./HornButton"
 import "../CSS/HornButton.css";
 
 function AllHorns({ horns, logos, setCurrentPage }) {
+    setCurrentPage("horns")
 
     function renderButtons() {
-        setCurrentPage("horns")
         return (
             Object.entries(logos).map((logo) => {
                 return (
                     <HornButton
                         logo={logo[1]}
                         horn={horns[logo[0]]}
+                        key={logo[0]}
                     />
                 )
             })
@@ -19,7 +20,7 @@ function AllHorns({ horns, logos, setCurrentPage }) {
 
     return (
         <>
-            <div class="all-buttons-div">
+            <div className="all-buttons-div">
                 {renderButtons()}
             </div>
         </>
