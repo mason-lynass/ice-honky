@@ -106,10 +106,16 @@ function AllGames({ horns, logos, setCurrentPage }) {
     }, [])
 
     // suppositional fetches, do with buzzers
+    let timeout1
+    let timeout2
     useEffect(() => {
-        setTimeout(() => {
+        timeout2 = setTimeout(() => {
             refresh()
         }, 5 * 1000)
+        return () => {
+            clearTimeout(timeout1)
+            clearTimeout(timeout2)
+        }
     }, [])
 
     function refresh() {
@@ -154,7 +160,7 @@ function AllGames({ horns, logos, setCurrentPage }) {
             }
         })
         // mason made this really long
-        setTimeout(refresh, 6000 * 1000)
+        timeout1 = setTimeout(refresh, 5 * 1000)
     }
 
     function AllTheGames() {
