@@ -85,6 +85,8 @@ function AllGames({ horns, logos, setCurrentPage }) {
 
     // initial fetch -- no buzzer sounds -- set up an object of all the current goals, so we know when to toot a horn
     let goalsObject = {}
+    const sortTeams = []
+    let sortedGoalsObject = {}
     useEffect(() => {
         fetch("https://nhl-score-api.herokuapp.com/api/scores/latest").then((r) => {
             if (r.ok) {
@@ -93,13 +95,20 @@ function AllGames({ horns, logos, setCurrentPage }) {
                     setScoresLoaded(true)
 
                     scores.games.map((game) => {
-                        // create goals object to check if there are new goals
+                        // create goals object to check if there are new goals 
+                        sortTeams.push(Object.keys(game.scores)[0])
+                        sortTeams.push(Object.keys(game.scores)[1])
+                        sortTeams.sort()
+
                         goalsObject[Object.keys(game.scores)[0]] = Object.values(game.scores)[0]
                         goalsObject[Object.keys(game.scores)[1]] = Object.values(game.scores)[1]
-                        console.log(Object.keys(game.scores)[0])
-                    })
+                    })    
+
+                    sortTeams.map((team) => {
+                        sortedGoalsObject[team] = goalsObject[team]
+                    })                                         
+
                     console.log('initial fetch!')
-                    console.log(goalsObject)
                 })
             }
         })
@@ -127,32 +136,42 @@ function AllGames({ horns, logos, setCurrentPage }) {
                     console.log("additional fetch!")
 
                     let updateObject = {}
+                    let sorted = []
+                    let sortedUpdateObject = {}
                     //create updateObject to compare to the goalsObject. if a team has a different score, toot their horn
                     scores.games.map((game) => {
+                        sorted.push(Object.keys(game.scores)[0])
+                        sorted.push(Object.keys(game.scores)[1])
+                        sorted.sort()
+
                         // away
                         updateObject[Object.keys(game.scores)[0]] = Object.values(game.scores)[0]
                         // home
                         updateObject[Object.keys(game.scores)[1]] = Object.values(game.scores)[1]
                     })
 
+                    sorted.map((team) => {
+                        sortedUpdateObject[team] = updateObject[team]
+                    })
+
 
                     let teamIdx = 0
 
-                    while (teamIdx < Object.keys(updateObject).length) {
+                    while (teamIdx < Object.keys(sortedUpdateObject).length) {
                         // if the new goals object (updateObject) does not equal the goalsObject that means somebody scored, and we need to toot a horn
-                        if (Object.values(updateObject)[teamIdx] !== Object.values(goalsObject)[teamIdx]) {
+                        if (Object.values(sortedUpdateObject)[teamIdx] !== Object.values(sortedGoalsObject)[teamIdx]) {
 
-                            console.log(Object.keys(updateObject)[teamIdx], "scored goal number: ", Object.values(updateObject)[teamIdx], "@", Date.now())
+                            console.log(Object.keys(sortedUpdateObject)[teamIdx], "scored goal number: ", Object.values(sortedUpdateObject)[teamIdx], "@", Date.now())
 
-                            goalsObject = updateObject
+                            sortedGoalsObject = sortedUpdateObject
 
-                            soundTeamHorn(Object.keys(updateObject)[teamIdx])
+                            soundTeamHorn(Object.keys(sortedUpdateObject)[teamIdx])
 
                             // break the while loop so we don't sound 2 horns at the same time
                             break
 
                         } else {
-                            console.log(Object.keys(updateObject)[teamIdx], "didn't score since last check")
+                            console.log(Object.keys(sortedUpdateObject)[teamIdx], "didn't score since last check")
                         }
                         teamIdx = teamIdx + 1
                     }
@@ -160,7 +179,7 @@ function AllGames({ horns, logos, setCurrentPage }) {
             }
         })
         // mason made this really long
-        timeout1 = setTimeout(refresh, 5 * 1000)
+        timeout1 = setTimeout(refresh, 500000 * 1000)
     }
 
     function AllTheGames() {
