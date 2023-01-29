@@ -38,7 +38,10 @@ function AllGames({ horns, logos, setCurrentPage }) {
     const [scores, setScores] = useState({})
     const [scoresLoaded, setScoresLoaded] = useState(false)
 
-    setCurrentPage("home")
+    useEffect(() => {
+        setCurrentPage("home")
+    },[])
+    
 
     // console.log(ANA)
     // console.log(Object.values(horns)[0])
@@ -179,14 +182,14 @@ function AllGames({ horns, logos, setCurrentPage }) {
             }
         })
         // mason made this really long
-        timeout1 = setTimeout(refresh, 500000 * 1000)
+        timeout1 = setTimeout(refresh, 10 * 1000)
     }
 
     function AllTheGames() {
         return (
             scores.games.map((game) => {
                 return (
-                    <OneGame horns={horns} game={game} logos={logos} />
+                    <OneGame key={game.teams.home.abbreviation} horns={horns} game={game} logos={logos} />
                 )
             })
         )
