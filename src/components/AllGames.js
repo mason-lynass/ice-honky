@@ -182,7 +182,7 @@ function AllGames({ horns, logos, setCurrentPage }) {
             }
         })
         // mason made this really long
-        timeout1 = setTimeout(refresh, 10 * 1000)
+        timeout1 = setTimeout(refresh, 10000000 * 1000)
     }
 
     function AllTheGames() {
