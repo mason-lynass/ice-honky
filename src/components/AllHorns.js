@@ -1,8 +1,11 @@
 import HornButton from "./HornButton"
 import "../CSS/HornButton.css";
+import { useEffect } from "react";
 
 function AllHorns({ horns, logos, setCurrentPage }) {
-    setCurrentPage("horns")
+    useEffect(() => {
+         setCurrentPage("horns")
+    })
 
     function renderButtons() {
         return (
