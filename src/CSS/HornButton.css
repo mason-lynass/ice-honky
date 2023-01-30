@@ -2,20 +2,30 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
+    animation: fadeIn 2s;
+}
 
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 .button-div {
     margin-left: 20px;
     margin-right: 20px;
     margin-top: 18px;
-    
+
 }
 
 .logo {
     width: 200px;
     height: auto;
-    transform: perspective( 170px ) rotateX( 17deg );
+    transform: perspective(170px) rotateX(17deg);
 }
 
 /* CSS */

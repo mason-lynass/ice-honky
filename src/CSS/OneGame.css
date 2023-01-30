@@ -5,25 +5,79 @@
     margin: 20px auto;
 }
 
+.center-line {
+    background: linear-gradient(red, red) no-repeat center/3px 100%;
+}
+
+.left-blueline {
+    background-image: linear-gradient(blue, blue);
+    background-size: 3px 100%;
+    background-repeat: no-repeat;
+    background-position: 38%;
+}
+
+.right-blueline {
+    background-image: linear-gradient(blue, blue);
+    background-size: 3px 100%;
+    background-repeat: no-repeat;
+    background-position: 62%;
+}
+
+.circle {
+    background-color: #fff;
+    border: 3px solid blue;
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    position: absolute;
+    z-index: -2;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    margin-top: auto;
+    text-align: center;
+    margin-top: 11.5%;
+}
+
+.circle-siren {
+    position: absolute;
+    z-index: 2;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    margin-top: auto;
+    text-align: center;
+    font-size: 2.5rem;
+    margin-top: 12%;
+}
+
 .infoFlex {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-around;
 }
 
-.awayTeamInfo, .homeTeamInfo {
+.awayTeamInfo,
+.homeTeamInfo {
     width: 300px;
 }
 
-.awayTeamName, .homeTeamName {
+.awayTeamName,
+.homeTeamName {
     margin-bottom: 0;
 }
 
-.awayLogo, .homeLogo {
+.awayLogo,
+.homeLogo {
     width: 100px;
 }
 
-.awayRecord, .homeRecord {
+.awayRecord,
+.homeRecord {
     margin: 0;
 }
 
@@ -41,7 +95,7 @@
 }
 
 .oneTeamGoals {
-    margin: 20px 0;
+    margin: 20px -30px;
     width: 240px;
 }
 
@@ -55,7 +109,7 @@
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
-    gap: 10px;
+    gap: 293px;
 }
 
 hr {
