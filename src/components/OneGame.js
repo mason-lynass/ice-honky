@@ -58,13 +58,17 @@ function OneGame({ game, horns, logos }) {
 
         if (goal.team === team) {
           return (
-            <p key={goal.team} className="oneGoal">
+            <p className="oneGoal">
               {goal.scorer.player} {seasonTotal} - {goal.period}{time}
             </p>
           )
-        } else return (<p key={goal.team} className="oneGoal"></p>)
+        } else return (<p className="oneGoal"></p>)
       });
     }
+
+    // don't think we're using these
+    const [awayHorn] = useSound(horns[game.teams.away.abbreviation]);
+    const [homeHorn] = useSound(horns[game.teams.home.abbreviation]);
 
     // information we can put on the scoreboard:
     // team names, team records, start time, status (live, final)
@@ -82,7 +86,7 @@ function OneGame({ game, horns, logos }) {
     function displayProgress(game) {
       if (game.status.progress) {
         return (
-          <p key={game.teams.home.id} className="gameProgress">
+          <p className="gameProgress">
             {game.status.progress.currentPeriodOrdinal} -{" "}
             {game.status.progress.currentPeriodTimeRemaining.pretty}
           </p>
