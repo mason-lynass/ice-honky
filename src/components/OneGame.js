@@ -116,59 +116,64 @@ function OneGame({ game, horns, logos }) {
     <div className="oneGame">
       <div className="circle-siren">🚨</div>
       <div className="circle"></div>
-      
+
       <div className="center-line">
-        <div className="left-blueline">
-          <div className="right-blueline">
-            <div className="infoFlex">
-              <div className="awayTeamInfo">
-                <h2 className="awayTeamName">
-                  {game.teams.away.locationName} {game.teams.away.teamName}
-                </h2>
-                {/* <img src={Object.values(logos)[0]} className="awayLogo" /> */}
-                <img
-                  src={findLogo(game.teams.away.abbreviation)}
-                  className="awayLogo" alt='away team logo'
-                />
-                <p className="awayRecord">
-                  {awayRecord[0]}-{awayRecord[1]}-{awayRecord[2]}
-                </p>
-                {/* <div className="oneTeamGoals">{teamGoals(awayGoals)}</div> */}
-              </div>
+        <div className="left-goalline">
+          <div className="right-crease"></div>
+          <div className="left-crease"></div>
+          <div className="left-blueline">
+            <div className="right-blueline">
+              <div className="right-goalline">
+                <div className="infoFlex">
+                  <div className="awayTeamInfo">
+                    <h2 className="awayTeamName">
+                      {game.teams.away.locationName} {game.teams.away.teamName}
+                    </h2>
+                    {/* <img src={Object.values(logos)[0]} className="awayLogo" /> */}
+                    <img
+                      src={findLogo(game.teams.away.abbreviation)}
+                      className="awayLogo" alt='away team logo'
+                    />
+                    <p className="awayRecord">
+                      {awayRecord[0]}-{awayRecord[1]}-{awayRecord[2]}
+                    </p>
+                    {/* <div className="oneTeamGoals">{teamGoals(awayGoals)}</div> */}
+                  </div>
 
-              <div className="OGCenter">
-                {/* <p>{time} PST</p> */}
-                <h4 className="gameStatus">{Object.values(game.status.state)}</h4>
-                {displayProgress(game)}
-                <h1 className="gameScore">
-                  {Object.values(scoreArray)[0]} - {Object.values(scoreArray)[1]}
-                </h1>
-              </div>
+                  <div className="OGCenter">
+                    {/* <p>{time} PST</p> */}
+                    <h4 className="gameStatus">{Object.values(game.status.state)}</h4>
+                    {displayProgress(game)}
+                    <h1 className="gameScore">
+                      {Object.values(scoreArray)[0]} - {Object.values(scoreArray)[1]}
+                    </h1>
+                  </div>
 
-              <div className="awayTeamInfo">
-                <h2 className="awayTeamName">
-                  {game.teams.home.locationName} {game.teams.home.teamName}
-                </h2>
-                <img
-                  src={findLogo(game.teams.home.abbreviation)}
-                  className="homeLogo"
-                  alt='home team logo'
-                />
-                <p className="homeRecord">
-                  {homeRecord[0]}-{homeRecord[1]}-{homeRecord[2]}
-                </p>
-                {/* <div className="oneTeamGoals">{teamGoals(homeGoals)}</div> */}
-              </div>
-            </div>
+                  <div className="awayTeamInfo">
+                    <h2 className="awayTeamName">
+                      {game.teams.home.locationName} {game.teams.home.teamName}
+                    </h2>
+                    <img
+                      src={findLogo(game.teams.home.abbreviation)}
+                      className="homeLogo"
+                      alt='home team logo'
+                    />
+                    <p className="homeRecord">
+                      {homeRecord[0]}-{homeRecord[1]}-{homeRecord[2]}
+                    </p>
+                    {/* <div className="oneTeamGoals">{teamGoals(homeGoals)}</div> */}
+                  </div>
+                </div>
 
-            {/* <h2>
+                {/* <h2>
                 <button onClick={awayHorn}>🚨</button> | <button onClick={homeHorn}>🚨</button>
             </h2> */}
-            <div>
-              {gameGoals()}
+                <div>
+                  {gameGoals()}
+                </div>
+              </div>
             </div>
           </div>
-
         </div>
       </div>
 

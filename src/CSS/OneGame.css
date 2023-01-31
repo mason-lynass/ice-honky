@@ -9,6 +9,37 @@
     background: linear-gradient(red, red) no-repeat center/3px 100%;
 }
 
+.left-goalline {
+    background-image: linear-gradient(red, red);
+    background-size: 2px 100%;
+    background-repeat: no-repeat;
+    background-position: 4%;
+}
+
+.left-crease {
+    position: absolute;
+    width: 30px;
+    height: 60px;
+    border: solid 2px #000;
+    border-color: red;
+    background-color: aqua;
+    border-radius: 0 12rem 12rem 0;
+    margin-top: 2%;
+    transform: translate(32px, 105px);
+}
+
+.right-crease {
+    position: absolute;
+    width: 30px;
+    height: 60px;
+    border: solid 2px #000;
+    border-color: red;
+    background-color: aqua;
+    border-radius: 12rem 0 0 12rem;
+    margin-top: 2%;
+    transform: translate(735px, 105px);
+}
+
 .left-blueline {
     background-image: linear-gradient(blue, blue);
     background-size: 3px 100%;
@@ -21,6 +52,13 @@
     background-size: 3px 100%;
     background-repeat: no-repeat;
     background-position: 62%;
+}
+
+.right-goalline {
+    background-image: linear-gradient(red, red);
+    background-size: 2px 100%;
+    background-repeat: no-repeat;
+    background-position: 96%;
 }
 
 .circle {
