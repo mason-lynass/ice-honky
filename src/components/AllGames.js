@@ -1,5 +1,6 @@
 import OneGame from "./OneGame"
 import { useState, useEffect } from "react"
+import Offseason from "./Offseason"
 // import ANA from "../audio/mp3s/ANA.mp3"
 // import ARI from "../audio/mp3s/ARI.mp3"
 // import BOS from "../audio/mp3s/BOS.mp3"
@@ -40,15 +41,14 @@ function AllGames({ horns, logos, setCurrentPage }) {
 
     useEffect(() => {
         setCurrentPage("home")
-    },[])
-    
+    }, [])
 
     // console.log(ANA)
     // console.log(Object.values(horns)[0])
     // console.log(Object.entries(horns).filter((horn) => horn[0] === "ANA")[0][0])
 
     function soundTeamHorn(abb) {
-        
+
         const teamHornArray = Object.entries(horns).filter((horn) => horn[0] === abb)
         // console.log(teamHornArray)
         return new Audio(teamHornArray[0][1]).play()
@@ -105,11 +105,11 @@ function AllGames({ horns, logos, setCurrentPage }) {
 
                         goalsObject[Object.keys(game.scores)[0]] = Object.values(game.scores)[0]
                         goalsObject[Object.keys(game.scores)[1]] = Object.values(game.scores)[1]
-                    })    
+                    })
 
                     sortTeams.map((team) => {
                         sortedGoalsObject[team] = goalsObject[team]
-                    })                                         
+                    })
 
                     console.log('initial fetch!')
                 })
@@ -123,7 +123,7 @@ function AllGames({ horns, logos, setCurrentPage }) {
     useEffect(() => {
         timeout2 = setTimeout(() => {
             refresh()
-        }, 5 * 1000)
+        }, 500000 * 1000)
         return () => {
             clearTimeout(timeout1)
             clearTimeout(timeout2)
@@ -198,12 +198,11 @@ function AllGames({ horns, logos, setCurrentPage }) {
 
     return (
         <>
-            <header>
-                <h1>Ice Honky</h1>
-            </header>
             <div id="AllGames">
                 {(scoresLoaded === true) ?
-                    AllTheGames() : <h2>loading...</h2>}
+                    AllTheGames()
+                    :
+                    <h2>loading...</h2>}
             </div>
         </>
     )
