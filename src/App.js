@@ -7,6 +7,7 @@ import { Route, Routes } from "react-router-dom"
 import AllHorns from "./components/AllHorns"
 import { useState } from "react"
 import DateCheck from './components/DateCheck';
+import About from './components/About'
 
 function App() {
 
@@ -31,7 +32,7 @@ function App() {
     <div className="App">
       <NavBar setCurrentPage={setCurrentPage} currentPage={currentPage}></NavBar>
       <header>
-        <h1>Ice Honky</h1>
+        <h1 id='title'>📢IceHonky.Net</h1>
       </header>
       <Routes>
         <Route
@@ -46,6 +47,11 @@ function App() {
             horns={horns}
           />}
           path="/horns"
+        >
+        </Route>
+        <Route
+          element={<About setCurrentPage={setCurrentPage}></About>}
+          path="/about"
         >
         </Route>
       </Routes>

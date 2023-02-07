@@ -5,3 +5,110 @@
 body {
   background-color: rgb(250, 250, 250);
 }
+
+#title {
+  font-family: "Faster One", cursive;
+  font-size: 3rem;
+  margin-top: 0;
+}
+
+.nav-div {
+    margin-top: 24px;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+.button-nav-pushable {
+  position: relative;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  outline-offset: 4px;
+  transition: filter 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  /* border-radius: 50%; */
+}
+
+.button-nav-shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  background: hsl(0deg 0% 0% / 0.25);
+  will-change: transform;
+  transform: translateY(2px);
+  transition:
+      transform 600ms cubic-bezier(.3, .7, .4, 1);
+  border-radius: 50%;
+}
+
+.button-nav-edge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: linear-gradient(to left,
+          hsl(0, 6%, 25%) 0%,
+          rgb(94, 91, 92) 8%,
+          hsl(338, 7%, 33%) 92%,
+          hsl(0, 0%, 24%) 100%);
+}
+
+.button-nav-front {
+  display: block;
+  position: relative;
+  padding: 12px 27px;
+  font-size: 1.1rem;
+  color: white;
+  background: hsl(348, 5%, 21%);
+  will-change: transform;
+  transform: translateY(-13px);
+  border-radius: 50%;
+  transition:
+      transform 600ms cubic-bezier(.3, .7, .4, 1);
+}
+
+.button-nav-pushable:hover {
+  filter: brightness(110%);
+  -webkit-filter: brightness(110%);
+}
+
+.button-nav-pushable:hover .button-nav-front {
+  /* transform: translateY(-20px); */
+  transition:
+      transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+}
+
+.button-nav-pushable:active .button-nav-front {
+  transform: translateY(-2px);
+  transition: transform 34ms;
+}
+
+.button-nav-pushable:hover .button-nav-shadow {
+  /* transform: translateY(4px); */
+  transition:
+      transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+}
+
+.button-nav-pushable:active .button-nav-shadow {
+  transform: translateY(1px);
+  transition: transform 34ms;
+}
+
+.button-nav-pushable:focus:not(:focus-visible) {
+  outline: none;
+}
+
+@media (max-width: 600px) {
+  #title {
+    font-size: 35px;
+  }
+}

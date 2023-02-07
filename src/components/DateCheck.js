@@ -1,7 +1,12 @@
 import AllGames from "./AllGames"
 import Offseason from "./Offseason"
+import { useEffect } from "react"
 
 function DateCheck({ setCurrentPage, logos, horns }) {
+
+    useEffect(() => {
+        setCurrentPage("home")
+    }, [])
 
     function hockeySeason() {
         const date = new Date()
