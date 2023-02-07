@@ -33,7 +33,13 @@ function OneGame({ game, horns, logos }) {
     homeGoals.push(allGoals[i]);
   }
 
+  const mobileScreen = window.matchMedia("(max-width: 500px)")
+
   function teamGoals(goals, team) {
+    if (mobileScreen.matches) {
+      goals = goals.splice(-2)
+    }
+
     return goals.map((goal) => {
 
       let second = goal.sec
@@ -63,17 +69,13 @@ function OneGame({ game, horns, logos }) {
 
       if (goal.team === team) {
         return (
-          <p className="oneGoal">
+          <p className="oneGoal player-goal-background">
             {goal.scorer.player} {seasonTotal} - {goal.period}{time}
           </p>
         )
       } else return (<p className="oneGoal"></p>)
     });
   }
-
-  // don't think we're using these
-  const [awayHorn] = useSound(horns[game.teams.away.abbreviation]);
-  const [homeHorn] = useSound(horns[game.teams.home.abbreviation]);
 
   // information we can put on the scoreboard:
   // team names, team records, start time, status (live, final)

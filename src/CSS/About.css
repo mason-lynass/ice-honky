@@ -1,0 +1,77 @@
+#about-div {
+    /* border: 2px solid black; */
+    /* border-radius: 30px; */
+    width: 1200px;
+    margin: 20px auto;
+    position: relative;
+    height: 600px;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+}
+
+
+#about-div::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('../images/honky-rink.png');
+    background-size: 100% 100%;
+    border-radius: 90px;
+    /* height: inherit; */
+    opacity: .4;
+    z-index: -1;
+}
+
+#white-background {
+    background-color: white;
+    margin: 0 200px;
+    border: 2px solid black;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px;
+}
+
+@media (max-width: 1200px) {
+    #about-div {
+        width: 900px;
+        height: 450px;
+    }
+}
+
+@media (max-width: 900px) {
+    #about-div {
+        width: 600px;
+        height: 300px;
+    }
+
+    #about-div h2 {
+        font-size: 18px;
+    }
+
+    #about-div h3 {
+        font-size: 14px;
+    }
+
+    #about-div::after {
+        border-radius: 67px;
+    }
+
+    #white-background {
+        margin: 0 8px;
+    }
+
+}
+
+@media (max-width: 600px) {
+    #about-div {
+        width: 300px;
+        height: 600px;
+
+    }
+
+    #about-div::after {
+        background-image: url('../images/honky-rink-vert.png');
+    }
+
+
+}

@@ -7,6 +7,7 @@ import { Route, Routes } from "react-router-dom"
 import AllHorns from "./components/AllHorns"
 import { useState } from "react"
 import DateCheck from './components/DateCheck';
+import About from './components/About'
 
 function App() {
 
@@ -46,6 +47,11 @@ function App() {
             horns={horns}
           />}
           path="/horns"
+        >
+        </Route>
+        <Route
+          element={<About setCurrentPage={setCurrentPage}></About>}
+          path="/about"
         >
         </Route>
       </Routes>

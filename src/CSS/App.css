@@ -14,6 +14,9 @@ body {
 
 .nav-div {
     margin-top: 24px;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
 }
 
 .button-nav-pushable {
@@ -102,4 +105,10 @@ body {
 
 .button-nav-pushable:focus:not(:focus-visible) {
   outline: none;
+}
+
+@media (max-width: 600px) {
+  #title {
+    font-size: 35px;
+  }
 }
