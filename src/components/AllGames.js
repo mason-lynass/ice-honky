@@ -13,11 +13,13 @@ function AllGames({ horns, logos }) {
         return new Audio(teamHornArray[0][1]).play()
     }
 
+
     // initial fetch -- no buzzer sounds -- set up an object of all the current goals, so we know when to toot a horn
     let goalsObject = {}
     const sortTeams = []
     let sortedGoalsObject = {}
     useEffect(() => {
+
         fetch("https://nhl-score-api.herokuapp.com/api/scores/latest").then((r) => {
             if (r.ok) {
                 r.json().then((scores) => {
@@ -48,12 +50,15 @@ function AllGames({ horns, logos }) {
     let timeout1
     let timeout2
     useEffect(() => {
-        timeout2 = setTimeout(() => {
-            refresh()
-        }, 500000 * 1000)
-        return () => {
-            clearTimeout(timeout1)
-            clearTimeout(timeout2)
+        const date = new Date()
+        if (date.getUTCHours() <= 8 || date.getUTCHours() >= 17) {
+            timeout2 = setTimeout(() => {
+                refresh()
+            }, 30 * 1000)
+            return () => {
+                clearTimeout(timeout1)
+                clearTimeout(timeout2)
+            }
         }
     }, [])
 
