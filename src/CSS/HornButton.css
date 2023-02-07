@@ -1,8 +1,16 @@
-.all-buttons-div {
+.div-buttons {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
     animation: fadeIn 2s;
+}
+
+.divh2 {
+    width: 200px;
+    margin: 20px auto;
+    border: 3px solid black;
+    border-radius: 20px;
+    padding: 5px;
 }
 
 @keyframes fadeIn {
@@ -19,7 +27,7 @@
 
 .logo {
     width: 200px;
-    height: auto;
+    height: 140px;
     transform: perspective( 170px ) rotateX( 17deg );
 }
 
