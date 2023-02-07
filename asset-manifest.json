@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/ice-honky/static/css/main.6d74dec0.css",
-    "main.js": "/ice-honky/static/js/main.ef8556e4.js",
+    "main.js": "/ice-honky/static/js/main.33a5cad5.js",
     "static/js/845.64a24dcb.chunk.js": "/ice-honky/static/js/845.64a24dcb.chunk.js",
     "static/js/787.1fb76357.chunk.js": "/ice-honky/static/js/787.1fb76357.chunk.js",
     "static/media/FLA.mp3": "/ice-honky/static/media/FLA.f744ae9da0a70f7519ee.mp3",
@@ -71,12 +71,12 @@
     "static/media/TBL.svg": "/ice-honky/static/media/TBL.5b51181db7cebd22c99b.svg",
     "index.html": "/ice-honky/index.html",
     "main.6d74dec0.css.map": "/ice-honky/static/css/main.6d74dec0.css.map",
-    "main.ef8556e4.js.map": "/ice-honky/static/js/main.ef8556e4.js.map",
+    "main.33a5cad5.js.map": "/ice-honky/static/js/main.33a5cad5.js.map",
     "845.64a24dcb.chunk.js.map": "/ice-honky/static/js/845.64a24dcb.chunk.js.map",
     "787.1fb76357.chunk.js.map": "/ice-honky/static/js/787.1fb76357.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6d74dec0.css",
-    "static/js/main.ef8556e4.js"
+    "static/js/main.33a5cad5.js"
   ]
 }
