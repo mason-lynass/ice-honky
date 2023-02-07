@@ -3,16 +3,21 @@ import useSound from "use-sound";
 import AllGames from "./AllGames";
 
 function OneGame({ game, horns, logos }) {
+
+    // for the All Star game, turn off the logos and the records in the JSX
+    // including recordsObjects and Records
+    // findLogo function
+
     // score
     const scoreArray = game.scores;
 
     // to access team records
-    // const recordsObject = game.currentStats.records;
-    // const awayRecordObject = Object.entries(recordsObject)[0][1];
-    // const homeRecordObject = Object.entries(recordsObject)[1][1];
+    const recordsObject = game.currentStats.records;
+    const awayRecordObject = Object.entries(recordsObject)[0][1];
+    const homeRecordObject = Object.entries(recordsObject)[1][1];
 
-    // const awayRecord = Object.values(awayRecordObject);
-    // const homeRecord = Object.values(homeRecordObject);
+    const awayRecord = Object.values(awayRecordObject);
+    const homeRecord = Object.values(homeRecordObject);
 
     // to show the game start time
     const event = new Date(game.startTime).toTimeString();
@@ -78,10 +83,10 @@ function OneGame({ game, horns, logos }) {
 
     const logosArray = Object.entries(logos);
 
-    // function findLogo(team) {
-    //   const logo = logosArray.filter((logo) => logo[0] === team);
-    //   return logo[0][1];
-    // }
+    function findLogo(team) {
+      const logo = logosArray.filter((logo) => logo[0] === team);
+      return logo[0][1];
+    }
 
     function displayProgress(game) {
       if (game.status.progress) {
@@ -119,14 +124,13 @@ function OneGame({ game, horns, logos }) {
             <h2 className="awayTeamName">
               {game.teams.away.locationName} {game.teams.away.teamName}
             </h2>
-            {/* <img src={Object.values(logos)[0]} className="awayLogo" /> */}
-            {/* <img
+            <img
               src={findLogo(game.teams.away.abbreviation)}
               className="awayLogo" alt='away team logo'
             />
             <p className="awayRecord">
               {awayRecord[0]}-{awayRecord[1]}-{awayRecord[2]}
-            </p> */}
+            </p>
             {/* <div className="oneTeamGoals">{teamGoals(awayGoals)}</div> */}
           </div>
 
@@ -143,14 +147,14 @@ function OneGame({ game, horns, logos }) {
                     <h2 className="awayTeamName">
                         {game.teams.home.locationName} {game.teams.home.teamName}
                     </h2>
-                    {/* <img
+                    <img
                         src={findLogo(game.teams.home.abbreviation)}
                         className="homeLogo"
                         alt='home team logo'
                     />
                     <p className="homeRecord">
                         {homeRecord[0]}-{homeRecord[1]}-{homeRecord[2]}
-                    </p> */}
+                    </p>
                     {/* <div className="oneTeamGoals">{teamGoals(homeGoals)}</div> */}
                 </div>
             </div>
