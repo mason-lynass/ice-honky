@@ -3,6 +3,11 @@ import useSound from "use-sound";
 import AllGames from "./AllGames";
 
 function OneGame({ game, horns, logos }) {
+
+    // for the All Star game, turn off the logos and the records in the JSX
+    // including recordsObjects and Records
+    // findLogo function
+
     // score
     const scoreArray = game.scores;
 
@@ -119,7 +124,6 @@ function OneGame({ game, horns, logos }) {
             <h2 className="awayTeamName">
               {game.teams.away.locationName} {game.teams.away.teamName}
             </h2>
-            {/* <img src={Object.values(logos)[0]} className="awayLogo" /> */}
             <img
               src={findLogo(game.teams.away.abbreviation)}
               className="awayLogo" alt='away team logo'
