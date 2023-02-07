@@ -11,10 +11,10 @@ function About({ setCurrentPage }) {
         <div>
             <div id="about-div">
                 <div id="white-background">
-                    <h2>
+                    <h2 id="bigger">
                         IceHonky.Net is a live-updating NHL Scoreboard celebrating the sounds of the sport. When a team scores, you'll hear their goal horn!
                     </h2>
-                    <h3>
+                    <h3 id="smaller">
                         You can also check out our horns page, which is a soundboard of each NHL team's stadium goal horn.
                     </h3>
                 </div>
