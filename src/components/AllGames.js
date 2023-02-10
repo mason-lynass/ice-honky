@@ -99,7 +99,7 @@ function AllGames({ horns, logos }) {
                     })
 
                     let teamIdx = 0
-                    while (teamIdx < Object.keys(sortedUpdateObject).length - 2) {
+                    while (teamIdx < Object.keys(sortedUpdateObject)) {
                         // if the new goals object (updateObject) does not equal the goalsObject that means somebody scored, and we need to toot a horn
                         if (Object.values(sortedUpdateObject)[teamIdx] !== Object.values(sortedGoalsObject)[teamIdx]) {
 
