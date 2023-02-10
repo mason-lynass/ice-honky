@@ -32,7 +32,7 @@ function App() {
     <div className="App">
       <NavBar setCurrentPage={setCurrentPage} currentPage={currentPage}></NavBar>
       <header>
-        <h1 id='title'>📢IceHonky.Net</h1>
+        <h1 id='title'>📢 IceHonky.Net</h1>
       </header>
       <Routes>
         <Route

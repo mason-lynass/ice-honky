@@ -1,4 +1,5 @@
 import OneGame from "./OneGame"
+import RecentGoal from "./RecentGoal"
 import "../CSS/AllGames.css"
 import { useState, useEffect } from "react"
 
@@ -6,14 +7,8 @@ function AllGames({ horns, logos }) {
 
     const [scores, setScores] = useState({})
     const [scoresLoaded, setScoresLoaded] = useState(false)
-
-    function soundTeamHorn(abb) {
-
-        const teamHornArray = Object.entries(horns).filter((horn) => horn[0] === abb)
-
-        return new Audio(teamHornArray[0][1]).play()
-    }
-
+    const [recentGoalVisible, setRecentGoalVisible] = useState(false)
+    const [teamWGoals, setTeamWGoals] = useState({})
 
     // initial fetch -- no buzzer sounds -- set up an object of all the current goals, so we know when to toot a horn
     let goalsObject = {}
@@ -63,6 +58,19 @@ function AllGames({ horns, logos }) {
         }
     }, [])
 
+    // to show the team that just scored in a big box,
+    // close that big box, and blur behind the box
+
+    const behind = document.querySelector("body")
+    function handleCloseRG() {
+        behind.classList.remove("behindBlur")
+        setRecentGoalVisible(false)
+    }
+    function showRecentGoal() {
+        behind.classList.add("behindBlur")
+        setRecentGoalVisible(true)
+    }
+
     function refresh() {
         fetch("https://nhl-score-api.herokuapp.com/api/scores/latest").then((r) => {
             if (r.ok) {
@@ -90,10 +98,8 @@ function AllGames({ horns, logos }) {
                         sortedUpdateObject[team] = updateObject[team]
                     })
 
-
                     let teamIdx = 0
-
-                    while (teamIdx < Object.keys(sortedUpdateObject).length) {
+                    while (teamIdx < Object.keys(sortedUpdateObject).length - 2) {
                         // if the new goals object (updateObject) does not equal the goalsObject that means somebody scored, and we need to toot a horn
                         if (Object.values(sortedUpdateObject)[teamIdx] !== Object.values(sortedGoalsObject)[teamIdx]) {
 
@@ -102,23 +108,28 @@ function AllGames({ horns, logos }) {
                             sortedGoalsObject = sortedUpdateObject
 
                             soundTeamHorn(Object.keys(sortedUpdateObject)[teamIdx])
-
+                            setTeamWGoals(Object.entries(sortedUpdateObject)[teamIdx])
+                            showRecentGoal()
                             // break the while loop so we don't sound 2 horns at the same time
                             break
 
                         } else {
-                            console.log(Object.keys(sortedUpdateObject)[teamIdx], "didn't score since last check")
+                            // get rid of all of this in this condition once i can show Alex that this works
+                            console.log(Object.entries(sortedUpdateObject)[teamIdx])
+
+                            setRecentGoalVisible(true)
+                            setTeamWGoals(Object.entries(sortedUpdateObject)[teamIdx])
+                            showRecentGoal()
+                            // console.log(Object.keys(sortedUpdateObject)[teamIdx], "didn't score since last check")
                         }
                         teamIdx = teamIdx + 1
                     }
                 })
             }
         })
-        // mason made this really long
+        // how often do you want the site to request scores from the API?
         timeout1 = setTimeout(refresh, 30 * 1000)
     }
-
-    
 
     function AllTheGames() {
         return (
@@ -128,13 +139,9 @@ function AllGames({ horns, logos }) {
                 )
             })
         )
-
     }
 
     function handleSoundClick() {
-
-        let volume = false
-
         if (document.querySelector(`.activeSoundButton`)) {
             const sound = document.getElementById(`soundButton`)
             sound.classList.remove('activeSoundButton')
@@ -142,29 +149,41 @@ function AllGames({ horns, logos }) {
             const sound = document.getElementById(`soundButton`)
             sound.classList.add('activeSoundButton')
         }
-        
     }
 
     function soundButton() {
-
         return (
             <button id='soundButton' onClick={handleSoundClick}>sound on</button>
         )
     }
 
+    function soundTeamHorn(abb) {
+        const teamHornArray = Object.entries(horns).filter((horn) => horn[0] === abb)
+        return new Audio(teamHornArray[0][1]).play()
+    }
+
+
     return (
-        <>
+        <main>
             <div id="AllGames">
                 {(scoresLoaded === true) ?
                     <div>
+                        {(recentGoalVisible === true ?
+                            <RecentGoal
+                                logos={logos}
+                                teamWGoals={teamWGoals}
+                                scores={scores}
+                                handleCloseRG={handleCloseRG}
+                            /> : "")}
+
                         {soundButton()}
                         {AllTheGames()}
                     </div>
-                    
+
                     :
                     <h2>loading...</h2>}
             </div>
-        </>
+        </main>
     )
 }
 
