@@ -1,4 +1,5 @@
 import OneGame from "./OneGame"
+import "../CSS/AllGames.css"
 import { useState, useEffect } from "react"
 
 function AllGames({ horns, logos }) {
@@ -117,6 +118,8 @@ function AllGames({ horns, logos }) {
         timeout1 = setTimeout(refresh, 30 * 1000)
     }
 
+    
+
     function AllTheGames() {
         return (
             scores.games.map((game) => {
@@ -128,11 +131,36 @@ function AllGames({ horns, logos }) {
 
     }
 
+    function handleSoundClick() {
+
+        let volume = false
+
+        if (document.querySelector(`.activeSoundButton`)) {
+            const sound = document.getElementById(`soundButton`)
+            sound.classList.remove('activeSoundButton')
+        } else if (document.getElementById(`soundButton`)) {
+            const sound = document.getElementById(`soundButton`)
+            sound.classList.add('activeSoundButton')
+        }
+        
+    }
+
+    function soundButton() {
+
+        return (
+            <button id='soundButton' onClick={handleSoundClick}>sound on</button>
+        )
+    }
+
     return (
         <>
             <div id="AllGames">
                 {(scoresLoaded === true) ?
-                    AllTheGames()
+                    <div>
+                        {soundButton()}
+                        {AllTheGames()}
+                    </div>
+                    
                     :
                     <h2>loading...</h2>}
             </div>

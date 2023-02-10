@@ -1,6 +1,4 @@
 import "../CSS/OneGame.css";
-import useSound from "use-sound";
-import AllGames from "./AllGames";
 
 function OneGame({ game, horns, logos }) {
 
@@ -121,7 +119,7 @@ function OneGame({ game, horns, logos }) {
 
   function renderLiveDot(status) {
     if(status === "LIVE") {
-      return "🔴"
+      return " 🔴"
     }
   }
 
