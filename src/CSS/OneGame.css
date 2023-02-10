@@ -168,6 +168,10 @@ hr {
   }
 
   @media (max-width: 500px) {
+    .nav-div {
+        margin-top: 60px;
+    }
+
     .infoFlex {
         padding-top: 3px;
     }

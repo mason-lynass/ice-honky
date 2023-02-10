@@ -128,9 +128,13 @@
     outline: none;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
     .logo {
         width: 100px;
         height: 70px
+    }
+
+    .button-82-front {
+        padding: 5px 15px;
     }
 }
