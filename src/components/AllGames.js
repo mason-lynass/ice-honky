@@ -71,11 +71,14 @@ function AllGames({ horns, logos }) {
         setRecentGoalVisible(true)
     }
 
+    let freshGoalsArray = []
+
     function refresh() {
         fetch("https://nhl-score-api.herokuapp.com/api/scores/latest").then((r) => {
             if (r.ok) {
                 r.json().then((scores) => {
 
+                    freshGoalsArray = []
                     setScores(scores)
                     console.log("additional fetch!")
 
@@ -107,17 +110,19 @@ function AllGames({ horns, logos }) {
 
                             sortedGoalsObject = sortedUpdateObject
 
-                            // do these things for each goal
-                            soundTeamHorn(Object.keys(sortedUpdateObject)[teamIdx])
-                            setTeamWGoals(Object.entries(sortedUpdateObject)[teamIdx])
-                            showRecentGoal()
-                            // break the while loop so we don't sound 2 horns at the same time
-                            break
+                            freshGoalsArray.push(Object.entries(sortedGoalsObject)[teamIdx])
+
+                            // // do these things for each goal
+                            // soundTeamHorn(Object.keys(sortedUpdateObject)[teamIdx])
+                            // setTeamWGoals(Object.entries(sortedUpdateObject)[teamIdx])
+                            // showRecentGoal()
+                            // // break the while loop so we don't sound 2 horns at the same time
+                            // break
 
                         } else {
                             // get rid of all of this in this condition once i can show Alex that this works
                             // console.log(Object.entries(sortedUpdateObject)[teamIdx])
-                            
+
                             // setTeamWGoals(Object.entries(sortedUpdateObject)[teamIdx])
                             // showRecentGoal()
 
@@ -127,6 +132,38 @@ function AllGames({ horns, logos }) {
                         }
                         teamIdx = teamIdx + 1
                     }
+                    freshGoalsArray.forEach((goal) => {
+                        console.log(goal)
+                    })
+                    // this will happen every time someone scores, and start immediately
+                    if (freshGoalsArray.length > 0) {
+                        soundTeamHorn(freshGoalsArray[0][0])
+                        setTeamWGoals(freshGoalsArray[0])
+                        showRecentGoal()
+                    }
+                    // if there are multiple goals in the same refresh:
+                    if (freshGoalsArray.length > 1) {
+                        // a new array of goals without the first goal (we took care of that in the earlier "if")
+                        const extraGoals = [...freshGoalsArray].splice(0, 1)
+                        console.log(extraGoals, freshGoalsArray)
+                        let goalNumber = 0
+                        // for each goal in the extraGoals array, sound the horn and show the goal
+                        // after the first goal is shown and heard
+                        setTimeout(() => {
+                            console.log(extraGoals[goalNumber])
+                            soundTeamHorn(extraGoals[goalNumber][0])
+                            setTeamWGoals(extraGoals[goalNumber])
+                            goalNumber++
+                        // if length = 2, 15 seconds after first horn,
+                        // if length = 3, 10 second intervals, etc.
+                        }, (30 / freshGoalsArray.length) * 1000)
+                    }
+                    // this does not yet work when 2 or more goals are scored by the same team
+                    // (which will be very rare, but could happen!)
+                    // because we're showing the recentGoal by filtering "scores" -
+                    // finding the game by comparing game teams to sortedUpdateObject[teamIdx],
+                    // then displaying the last goal in the array of goals.
+                    // in this case, I'm pretty sure it will display the last goal 2 (or more) times
                 })
             }
         })

@@ -9,6 +9,11 @@ function RecentGoal({ scores, teamWGoals, handleCloseRG, logos }) {
     console.log(latestGoal)
     const player = latestGoal.scorer.player
     const playerTotal = latestGoal.scorer.seasonTotal
+    if (player === null) {
+        player = ""
+        playerTotal = ""
+    }
+
     let second = latestGoal.sec
     if (second.toString().length === 1) {
         second = `0${latestGoal.sec}`
@@ -58,7 +63,10 @@ function RecentGoal({ scores, teamWGoals, handleCloseRG, logos }) {
                 <h3>{player} ({playerTotal})</h3>
                 <h3>{scoredAt}</h3>
                 <div>
-                    <p id="allAssists">AST: </p>
+                    {(assists.length > 0) ?
+                        <p id="allAssists">AST: </p> :
+                        <p id="allAssists"></p>
+                    }
                     {showAssists()}
                 </div>
 
