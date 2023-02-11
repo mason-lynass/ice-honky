@@ -107,6 +107,7 @@ function AllGames({ horns, logos }) {
 
                             sortedGoalsObject = sortedUpdateObject
 
+                            // do these things for each goal
                             soundTeamHorn(Object.keys(sortedUpdateObject)[teamIdx])
                             setTeamWGoals(Object.entries(sortedUpdateObject)[teamIdx])
                             showRecentGoal()
@@ -115,12 +116,14 @@ function AllGames({ horns, logos }) {
 
                         } else {
                             // get rid of all of this in this condition once i can show Alex that this works
-                            console.log(Object.entries(sortedUpdateObject)[teamIdx])
+                            // console.log(Object.entries(sortedUpdateObject)[teamIdx])
+                            
+                            // setTeamWGoals(Object.entries(sortedUpdateObject)[teamIdx])
+                            // showRecentGoal()
 
-                            setRecentGoalVisible(true)
-                            setTeamWGoals(Object.entries(sortedUpdateObject)[teamIdx])
-                            showRecentGoal()
-                            // console.log(Object.keys(sortedUpdateObject)[teamIdx], "didn't score since last check")
+                            setRecentGoalVisible(false)
+                            behind.classList.remove("behindBlur")
+                            console.log(Object.keys(sortedUpdateObject)[teamIdx], "didn't score since last check")
                         }
                         teamIdx = teamIdx + 1
                     }

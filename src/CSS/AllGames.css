@@ -16,20 +16,25 @@
 
 .behindBlur::after {
     content: '';
+    height: 500vh;
+    overflow: hidden;
     background-color: grey;
     opacity: .7;
     position: absolute;
+    /* position: -webkit-sticky;
+    position: sticky; */
     inset: 0;
 }
 
 #recentGoalContainer {
     backdrop-filter: blur(5px);
-    position: absolute;
+    position: -webkit-sticky;
+    position: sticky;
     top: 100px;
-    left: 0;
+    left: 50%;
     z-index: 5;
     background-color: white;
-    width: 60%;
+    /* width: 60%; */
     margin: 0 20%;
     border: 2px solid black;
 }
@@ -63,7 +68,15 @@
     margin: -30px;
 }
 
-.assist {
+.assist, #allAssists {
     display: inline;
     margin: 5px;
+}
+
+@media screen and (min-width: 1500px) {
+    #recentGoalContainer {
+        width: 900px;
+        margin: 0 auto;
+        left: 0%;
+    }
 }
