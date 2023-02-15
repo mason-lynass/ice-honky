@@ -1,6 +1,4 @@
 import './CSS/App.css';
-// import OneGame from './components/OneGame';
-import AllGames from './components/AllGames';
 // import { useState, useEffect } from "react"
 import NavBar from './components/NavBar'
 import { Route, Routes } from "react-router-dom"
