@@ -50,7 +50,7 @@ function AllGames({ horns, logos }) {
         if (date.getUTCHours() <= 8 || date.getUTCHours() >= 17) {
             timeout2 = setTimeout(() => {
                 refresh()
-            }, 30 * 1000)
+            }, 3 * 1000)
             return () => {
                 clearTimeout(timeout1)
                 clearTimeout(timeout2)
@@ -70,6 +70,12 @@ function AllGames({ horns, logos }) {
         behind.classList.add("behindBlur")
         setRecentGoalVisible(true)
     }
+    useEffect(() => {
+        behind.addEventListener('click', handleCloseRG)
+        return () => {
+            behind.removeEventListener('click', handleCloseRG)
+        }
+    })
 
     let freshGoalsArray = []
 
@@ -123,12 +129,12 @@ function AllGames({ horns, logos }) {
                             // get rid of all of this in this condition once i can show Alex that this works
                             // console.log(Object.entries(sortedUpdateObject)[teamIdx])
 
-                            // setTeamWGoals(Object.entries(sortedUpdateObject)[teamIdx])
-                            // showRecentGoal()
+                            setTeamWGoals(Object.entries(sortedUpdateObject)[teamIdx])
+                            showRecentGoal()
 
-                            setRecentGoalVisible(false)
-                            behind.classList.remove("behindBlur")
-                            console.log(Object.keys(sortedUpdateObject)[teamIdx], "didn't score since last check")
+                            // setRecentGoalVisible(false)
+                            // behind.classList.remove("behindBlur")
+                            // console.log(Object.keys(sortedUpdateObject)[teamIdx], "didn't score since last check")
                         }
                         teamIdx = teamIdx + 1
                     }

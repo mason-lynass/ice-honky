@@ -55,7 +55,7 @@ function RecentGoal({ scores, teamWGoals, handleCloseRG, logos }) {
     }
 
     return (
-        <div id="recentGoalContainer">
+        <div id="recentGoalContainer" onClick={e => e.stopPropagation()}>
             <button id="RGClose" onClick={handleCloseRG}>x</button>
             <div id='recentGoal'>
                 <h1>{latestGoal.team} just scored!</h1>
