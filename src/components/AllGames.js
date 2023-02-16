@@ -119,6 +119,8 @@ function AllGames({ horns, logos }) {
                         }
                         teamIdx = teamIdx + 1
                     }
+
+                    // check if same team is in freshGoalsArray more than once, setDoubleGoalSameTeam to true. if it's true, RecentGoal.js has a function where it will display the second most recent goal. doubleGoalSameTeam will get set to false within the extraGoalsTimer
                     const sameTeam = {}
                     freshGoalsArray.forEach((goal) => {
                         if (!sameTeam[goal[0]]) {
