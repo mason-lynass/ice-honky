@@ -10,6 +10,7 @@ function AllGames({ horns, logos }) {
     const [recentGoalVisible, setRecentGoalVisible] = useState(false)
     const [volume, setVolume] = useState(false)
     const [teamWGoals, setTeamWGoals] = useState({})
+    const [doubleGoalSameTeam, setDoubleGoalSameTeam] = useState(false)
 
     // initial fetch -- no buzzer sounds -- set up an object of all the current goals, so we know when to toot a horn
     let goalsObject = {}
@@ -73,7 +74,7 @@ function AllGames({ horns, logos }) {
     }
 
     // you can use this one to test multiple goals
-    // let freshGoalsArray = [['TOR', 5], ['DET', 2]]
+    // let freshGoalsArray = [['TOR', 5], ['TOR', 4]]
     let freshGoalsArray = []
 
     function refresh() {
@@ -81,7 +82,7 @@ function AllGames({ horns, logos }) {
             if (r.ok) {
                 r.json().then((scores) => {
 
-                    // freshGoalsArray = []
+                    freshGoalsArray = []
                     setScores(scores)
                     console.log("additional fetch!")
 
@@ -118,27 +119,31 @@ function AllGames({ horns, logos }) {
                         }
                         teamIdx = teamIdx + 1
                     }
-
+                    const sameTeam = {}
                     freshGoalsArray.forEach((goal) => {
-                        console.log(goal)
+                        if (!sameTeam[goal[0]]) {
+                            sameTeam[goal[0]] = 1
+                        } else setDoubleGoalSameTeam(true)
                     })
                     // this will happen every time someone scores, and start immediately
                     if (freshGoalsArray.length > 0) {
-                        console.log(freshGoalsArray)
+
                         soundTeamHorn(freshGoalsArray[0][0])
                         // soundTeamHorn(freshGoalsArray[0][0])
                         setTeamWGoals(freshGoalsArray[0])
                         showRecentGoal()
+                        
                     }
                     // if there are multiple goals in the same refresh:
                     if (freshGoalsArray.length > 1) {
                         // a new array of goals without the first goal (we took care of that in the earlier "if")
                         const extraGoals = [...freshGoalsArray].slice(1)
-                        console.log(extraGoals, freshGoalsArray)
+
                         let goalNumber = 0
                         // for each goal in the extraGoals array, sound the horn and show the goal
                         // after the first goal is shown and heard
                         let extraGoalsTimer = setInterval(() => {
+                            setDoubleGoalSameTeam(false)
                             setRecentGoalVisible(true)
                             soundTeamHorn(extraGoals[goalNumber][0])
                             setTeamWGoals(extraGoals[goalNumber])
@@ -146,9 +151,9 @@ function AllGames({ horns, logos }) {
                             // if length = 2, 15 seconds after first horn,
                             // if length = 3, 10 second intervals, etc.
                         }, (30 / freshGoalsArray.length) * 1000)
-                        setTimeout(() => {clearInterval(extraGoalsTimer)}, 29000)
+                        setTimeout(() => { clearInterval(extraGoalsTimer) }, 29000)
                     }
-                    
+
                     // this does not yet work when 2 or more goals are scored by the same team
                     // (which will be very rare, but could happen!)
                     // because we're showing the recentGoal by filtering "scores" -
@@ -215,6 +220,7 @@ function AllGames({ horns, logos }) {
                                 teamWGoals={teamWGoals}
                                 scores={scores}
                                 handleCloseRG={handleCloseRG}
+                                doubleGoalSameTeam={doubleGoalSameTeam}
                             /> : "")}
 
                         {soundButton()}

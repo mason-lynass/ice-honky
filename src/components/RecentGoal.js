@@ -1,4 +1,4 @@
-function RecentGoal({ scores, teamWGoals, handleCloseRG, logos }) {
+function RecentGoal({ scores, teamWGoals, handleCloseRG, logos, doubleGoalSameTeam }) {
 
     // the team that scored
     const team = Object.values(teamWGoals)
@@ -13,7 +13,12 @@ function RecentGoal({ scores, teamWGoals, handleCloseRG, logos }) {
         }
     })
 
-    const latestGoal = (teamGoals.slice(-1))[0]
+    function sliceAmt() {
+        if (doubleGoalSameTeam) return -2
+        else return -1
+    }
+
+    const latestGoal = (teamGoals.slice(sliceAmt()))[0]
     const player = latestGoal.scorer.player
     let playerTotal = latestGoal.scorer.seasonTotal
     if (player === null) {
