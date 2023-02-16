@@ -5,7 +5,15 @@ function RecentGoal({ scores, teamWGoals, handleCloseRG, logos }) {
 
     const gameWeCareAbout = scores.games.filter((game) => game.teams.away.abbreviation === team[0] || game.teams.home.abbreviation === team[0])
 
-    const latestGoal = (gameWeCareAbout[0].goals.slice(-1))[0]
+    const teamGoals = []
+
+    gameWeCareAbout[0].goals.forEach((goal) => {
+        if (goal.team === team[0]) {
+            teamGoals.push(goal)
+        }
+    })
+
+    const latestGoal = (teamGoals.slice(-1))[0]
     const player = latestGoal.scorer.player
     let playerTotal = latestGoal.scorer.seasonTotal
     if (player === null) {

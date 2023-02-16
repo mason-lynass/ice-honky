@@ -52,7 +52,7 @@ function AllGames({ horns, logos }) {
         if (date.getUTCHours() <= 8 || date.getUTCHours() >= 17) {
             timeout2 = setTimeout(() => {
                 refresh()
-            }, 30 * 1000)
+            }, 3 * 1000)
             return () => {
                 clearTimeout(timeout1)
                 clearTimeout(timeout2)
@@ -73,7 +73,7 @@ function AllGames({ horns, logos }) {
     }
 
     // you can use this one to test multiple goals
-    // let freshGoalsArray = [['TBL', 4],['MTL', 4],['PIT', 3]]
+    // let freshGoalsArray = [['TOR', 5], ['DET', 2]]
     let freshGoalsArray = []
 
     function refresh() {
