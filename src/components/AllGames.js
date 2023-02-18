@@ -166,7 +166,7 @@ function AllGames({ horns, logos }) {
             }
         })
         // how often do you want the site to request scores from the API?
-        timeout1 = setTimeout(refresh, 30 * 1000)
+        timeout1 = setTimeout(refresh, 300 * 1000)
     }
 
     function AllTheGames() {
