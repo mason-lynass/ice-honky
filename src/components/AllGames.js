@@ -88,7 +88,7 @@ function AllGames({ horns, logos }) {
 
                     // you can use this one to test multiple goals
                     // let freshGoalsArray = [['TOR', 5], ['TOR', 4]]
-                    freshGoalsArray = []
+                    let freshGoalsArray = []
                     setScores(scores)
                     console.log("additional fetch!")
 
