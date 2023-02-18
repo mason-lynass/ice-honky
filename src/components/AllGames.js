@@ -79,16 +79,16 @@ function AllGames({ horns, logos }) {
         }
     })
 
-    // you can use this one to test multiple goals
-    // let freshGoalsArray = [['TOR', 5], ['TOR', 4]]
-    let freshGoalsArray = []
+
 
     function refresh() {
         fetch("https://nhl-score-api.herokuapp.com/api/scores/latest").then((r) => {
             if (r.ok) {
                 r.json().then((scores) => {
 
-                    freshGoalsArray = [['COL', 4]]
+                    // you can use this one to test multiple goals
+                    // let freshGoalsArray = [['TOR', 5], ['TOR', 4]]
+                    freshGoalsArray = []
                     setScores(scores)
                     console.log("additional fetch!")
 
@@ -140,7 +140,7 @@ function AllGames({ horns, logos }) {
                         // soundTeamHorn(freshGoalsArray[0][0])
                         setTeamWGoals(freshGoalsArray[0])
                         showRecentGoal()
-                        
+
                     }
                     // if there are multiple goals in the same refresh:
                     if (freshGoalsArray.length > 1) {
