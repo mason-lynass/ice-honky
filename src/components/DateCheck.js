@@ -2,7 +2,7 @@ import AllGames from "./AllGames"
 import Offseason from "./Offseason"
 import { useEffect } from "react"
 
-function DateCheck({ setCurrentPage, logos, horns }) {
+function DateCheck({ setCurrentPage, logos, horns, volume, setVolume }) {
 
     useEffect(() => {
         setCurrentPage("home")
@@ -19,7 +19,9 @@ function DateCheck({ setCurrentPage, logos, horns }) {
                 <AllGames
                     setCurrentPage={setCurrentPage}
                     logos={logos}
-                    horns={horns}>
+                    horns={horns}
+                    volume={volume}
+                    setVolume={setVolume}>
                 </AllGames>
                 :
                 <Offseason

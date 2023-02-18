@@ -3,10 +3,30 @@ import useSound from "use-sound"
 import puckSound from "../audio/mp3s/a.pucksound.mp3"
 
 
-function NavBar({ currentPage, setCurrentPage }) {
-
+function NavBar({ currentPage, setCurrentPage, volume, setVolume }) {
 
     const [puck] = useSound(puckSound)
+
+    function playPuckSound() {
+        if (volume) {
+            return puck()
+        }
+    }
+
+    function handleSoundClick() {
+        if (!volume) {
+            puck()
+        }
+        setVolume(!volume)   
+    }
+
+    function soundButton() {
+        return (
+            <button id='soundButton' onClick={handleSoundClick}>
+                {volume ? "🔊" : "🔇"}
+            </button>
+        )
+    }
 
     function hornButton() {
         if (currentPage === "horns") {
@@ -14,7 +34,7 @@ function NavBar({ currentPage, setCurrentPage }) {
                 <>
                     <Link to="/">
                         {/* <div className="nav-div"> */}
-                        <button className="button-nav-pushable nav-front" onClick={puck} role="button">
+                        <button className="button-nav-pushable nav-front" onClick={playPuckSound} role="button">
                             <span className="button-nav-shadow"></span>
                             <span className="button-nav-edge"></span>
                             <span className="button-nav-front text">
@@ -31,7 +51,7 @@ function NavBar({ currentPage, setCurrentPage }) {
                 <>
                     <Link to='/horns'>
                         {/* <div className="nav-div"> */}
-                        <button onClick={puck} className="button-nav-pushable nav-front" role="button">
+                        <button onClick={playPuckSound} className="button-nav-pushable nav-front" role="button">
                             <span className="button-nav-shadow"></span>
                             <span className="button-nav-edge"></span>
                             <span className="button-nav-front text">
@@ -49,7 +69,7 @@ function NavBar({ currentPage, setCurrentPage }) {
         if (currentPage === "home" || currentPage === "horns") {
             return (
                 <Link to="/about">
-                    <button className="button-nav-pushable nav-front" onClick={puck} role="button">
+                    <button className="button-nav-pushable nav-front" onClick={playPuckSound} role="button">
                         <span className="button-nav-shadow"></span>
                         <span className="button-nav-edge"></span>
                         <span className="button-nav-front text">
@@ -63,7 +83,7 @@ function NavBar({ currentPage, setCurrentPage }) {
             return (
                 <Link to="/">
                     {/* <div className="nav-div"> */}
-                    <button className="button-nav-pushable nav-front" onClick={puck} role="button">
+                    <button className="button-nav-pushable nav-front" onClick={playPuckSound} role="button">
                         <span className="button-nav-shadow"></span>
                         <span className="button-nav-edge"></span>
                         <span className="button-nav-front text">
@@ -78,6 +98,7 @@ function NavBar({ currentPage, setCurrentPage }) {
 
     return (
         <div className="nav-div">
+            {currentPage === "home" ? soundButton() : null}
             {aboutButton()}
             {hornButton()}
         </div>

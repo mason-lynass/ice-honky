@@ -1,16 +1,20 @@
 import OneGame from "./OneGame"
 import RecentGoal from "./RecentGoal"
 import "../CSS/AllGames.css"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 
-function AllGames({ horns, logos }) {
+function AllGames({ horns, logos, volume, setVolume }) {
 
     const [scores, setScores] = useState({})
     const [scoresLoaded, setScoresLoaded] = useState(false)
     const [recentGoalVisible, setRecentGoalVisible] = useState(false)
-    const [volume, setVolume] = useState(false)
+    
+    const volumeRef = useRef(volume)
+    volumeRef.current = volume
     const [teamWGoals, setTeamWGoals] = useState({})
     const [doubleGoalSameTeam, setDoubleGoalSameTeam] = useState(false)
+
+    console.log(volume)
 
     // initial fetch -- no buzzer sounds -- set up an object of all the current goals, so we know when to toot a horn
     let goalsObject = {}
@@ -74,15 +78,15 @@ function AllGames({ horns, logos }) {
     }
 
     // you can use this one to test multiple goals
-    // let freshGoalsArray = [['TOR', 5], ['TOR', 4]]
-    let freshGoalsArray = []
+    let freshGoalsArray = [['COL', 4], ['STL', 1]]
+    // let freshGoalsArray = []
 
     function refresh() {
         fetch("https://nhl-score-api.herokuapp.com/api/scores/latest").then((r) => {
             if (r.ok) {
                 r.json().then((scores) => {
 
-                    freshGoalsArray = []
+                    // freshGoalsArray = []
                     setScores(scores)
                     console.log("additional fetch!")
 
@@ -134,7 +138,7 @@ function AllGames({ horns, logos }) {
                         // soundTeamHorn(freshGoalsArray[0][0])
                         setTeamWGoals(freshGoalsArray[0])
                         showRecentGoal()
-                        
+
                     }
                     // if there are multiple goals in the same refresh:
                     if (freshGoalsArray.length > 1) {
@@ -186,29 +190,31 @@ function AllGames({ horns, logos }) {
         )
     }
 
-    function handleSoundClick() {
-        if (document.querySelector(`.activeSoundButton`)) {
-            const sound = document.getElementById(`soundButton`)
-            sound.classList.remove('activeSoundButton')
-            setVolume(false)
-        } else if (document.getElementById(`soundButton`)) {
-            const sound = document.getElementById(`soundButton`)
-            sound.classList.add('activeSoundButton')
-            setVolume(true)
-        }
-    }
+    // function handleSoundClick() {
+    //     if (volume) {
+    //         const sound = document.getElementById(`soundButton`)
+    //         sound.classList.remove('activeSoundButton')
+    //         setVolume(false)
+    //     } else {
+    //         const sound = document.getElementById(`soundButton`)
+    //         sound.classList.add('activeSoundButton')
+    //         setVolume(true)
+    //     }
+    // }
 
-    function soundButton() {
-        return (
-            <button id='soundButton' onClick={handleSoundClick}>
-                {(volume === true) ? "sound on" : "sound off"}
-            </button>
-        )
-    }
+    // function soundButton() {
+    //     return (
+    //         <button id='soundButton' onClick={handleSoundClick}>
+    //             {(volume === true) ? "sound on" : "sound off"}
+    //         </button>
+    //     )
+    // }
 
     function soundTeamHorn(abb) {
-        const teamHornArray = Object.entries(horns).filter((horn) => horn[0] === abb)
-        return new Audio(teamHornArray[0][1]).play()
+        if (volumeRef.current) {
+            const teamHornArray = Object.entries(horns).filter((horn) => horn[0] === abb)
+            return new Audio(teamHornArray[0][1]).play()
+        }
     }
 
     return (
@@ -225,10 +231,9 @@ function AllGames({ horns, logos }) {
                                 doubleGoalSameTeam={doubleGoalSameTeam}
                             /> : "")}
 
-                        {soundButton()}
+                        {/* {soundButton()} */}
                         {AllTheGames()}
                     </div>
-
                     :
                     <h2>loading...</h2>}
             </div>

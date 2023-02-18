@@ -112,3 +112,20 @@ body {
     font-size: 35px;
   }
 }
+
+#soundButton {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  border: 2px solid black;
+  font-family: 'Oswald';
+  width: 100px;
+  margin: 10px;
+  border-radius: 20px;
+  /* padding: 5px; */
+  font-size: 1rem;
+}
+
+.activeSoundButton::after {
+  content: "   🔊"
+}

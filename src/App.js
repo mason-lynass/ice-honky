@@ -11,6 +11,7 @@ function App() {
 
   // this is like an import up there ^^, just importing the whole folder of mp3 horns 
   const [currentPage, setCurrentPage] = useState("")
+  const [volume, setVolume] = useState(false)
 
   function importHorns(r) {
     let horns = {};
@@ -28,13 +29,24 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar setCurrentPage={setCurrentPage} currentPage={currentPage}></NavBar>
+      <NavBar
+        setCurrentPage={setCurrentPage}
+        currentPage={currentPage}
+        volume={volume}
+        setVolume={setVolume}>
+      </NavBar>
       <header>
         <h1 id='title'>📢 IceHonky.Net</h1>
       </header>
       <Routes>
         <Route
-          element={<DateCheck setCurrentPage={setCurrentPage} logos={logos} horns={horns} />}
+          element={<DateCheck
+            setCurrentPage={setCurrentPage}
+            logos={logos}
+            horns={horns}
+            volume={volume}
+            setVolume={setVolume}
+          />}
           path="/"
         >
         </Route>
