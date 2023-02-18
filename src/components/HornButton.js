@@ -8,6 +8,8 @@ function HornButton({ logo, horn }) {
 
     const [logoLoaded, setLogoLoaded] = useState(false)
 
+    const logoAltText = `${logo[0]} logo`
+
     return (
         <div className="button-div" onClick={soundHorn}>
             <button className="button-82-pushable" role="button">
@@ -22,8 +24,9 @@ function HornButton({ logo, horn }) {
                       }}>
                     </div>}
                     <img className="logo"
+                        alt={logoAltText}
                         style={logoLoaded ? {} : { display: 'none' }}
-                        src={logo}
+                        src={logo[1]}
                         onLoad={() => setLogoLoaded(true)}
                     />
                     

@@ -123,6 +123,10 @@ function OneGame({ game, horns, logos }) {
     }
   }
 
+  function logoAltText (team) {
+    return `${team} logo`
+  }
+
   return (
     <div className="oneGame">
       <div className="infoFlex">
@@ -132,7 +136,8 @@ function OneGame({ game, horns, logos }) {
           </h2>
           <img
             src={findLogo(game.teams.away.abbreviation)}
-            className="awayLogo" alt='away team logo'
+            alt={logoAltText(game.teams.away.abbreviation)}
+            className="awayLogo"
           />
           <p className="awayRecord">
             {awayRecord[0]}-{awayRecord[1]}-{awayRecord[2]}
@@ -144,7 +149,7 @@ function OneGame({ game, horns, logos }) {
           {/* <p>{time} PST</p> */}
           <h4 className="gameStatus">
             {Object.values(game.status.state)}
-            <smaller>{renderLiveDot(game.status.state)}</smaller>
+            {renderLiveDot(game.status.state)}
           </h4>
           {displayProgress(game)}
           <h1 className="gameScore">
@@ -159,7 +164,7 @@ function OneGame({ game, horns, logos }) {
           <img
             src={findLogo(game.teams.home.abbreviation)}
             className="homeLogo"
-            alt='home team logo'
+            alt={logoAltText(game.teams.home.abbreviation)}
           />
           <p className="homeRecord">
             {homeRecord[0]}-{homeRecord[1]}-{homeRecord[2]}

@@ -73,7 +73,7 @@
 
 .oneTeamGoals {
     margin: 20px 0;
-    width: 250px;
+    width: 280px;
 }
 
 .oneGoal {
@@ -167,7 +167,7 @@ hr {
     
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 550px) {
     .nav-div {
         margin-top: 60px;
     }

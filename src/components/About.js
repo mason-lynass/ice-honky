@@ -8,7 +8,7 @@ function About({ setCurrentPage }) {
     }, [])
 
     return (
-        <div>
+        <main>
             <div id="about-div">
                 <div id="white-background">
                     <h2 id="bigger">
@@ -19,7 +19,7 @@ function About({ setCurrentPage }) {
                     </h3>
                 </div>
             </div>
-        </div>
+        </main>
     )
 }
 

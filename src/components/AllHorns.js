@@ -130,12 +130,12 @@ function AllHorns({ horns, logos, setCurrentPage }) {
       const hornArray = Object.entries(horns).filter((horn) => horn[0] === logo[0]);
         const horn = hornArray[0][1]
         console.log(hornArray)
-      return <HornButton logo={logo[1]} horn={horn} key={logo[0]} />;
+      return <HornButton logo={logo} horn={horn} key={logo[0]} />;
     });
   }
 
   return (
-    <>
+    <main>
       <div className="">
       <h2 className="divh2">Metro Division</h2>
         <div className="div-buttons" id="metro">{renderButtons(metroLogos, metroHorns)}</div>
@@ -146,7 +146,7 @@ function AllHorns({ horns, logos, setCurrentPage }) {
         <h2 className="divh2">Pacific Division</h2>
         <div className="div-buttons" id="pacific">{renderButtons(pacificLogos, pacificHorns)}</div>
       </div>
-    </>
+    </main>
   );
 }
 
