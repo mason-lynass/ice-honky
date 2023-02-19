@@ -35,7 +35,7 @@ function OneGame({ game, horns, logos }) {
 
   function teamGoals(goals, team) {
     if (mobileScreen.matches) {
-      goals = goals.splice(-2)
+      goals = goals.splice(-3)
     }
 
     return goals.map((goal) => {
@@ -67,7 +67,7 @@ function OneGame({ game, horns, logos }) {
 
       if (goal.team === team) {
         return (
-          <p className="oneGoal player-goal-background">
+          <p key={goal.scorer.player + time} className="oneGoal player-goal-background">
             {goal.scorer.player} {seasonTotal} - {goal.period}{time}
           </p>
         )
@@ -157,8 +157,8 @@ function OneGame({ game, horns, logos }) {
           </h1>
         </div>
 
-        <div className="awayTeamInfo">
-          <h2 className="awayTeamName">
+        <div className="homeTeamInfo">
+          <h2 className="homeTeamName">
             {game.teams.home.locationName} {game.teams.home.teamName}
           </h2>
           <img

@@ -41,7 +41,7 @@
 }
 
 .awayLogo, .homeLogo {
-    width: 150px;
+    height: 107px;
 }
 
 .awayRecord, .homeRecord {
@@ -167,7 +167,16 @@ hr {
     
   }
 
+  @media (max-width: 627px) {
+
+    .oneGame {
+        width: 505px;
+        min-height: 300px;
+    }
+  }
+
   @media (max-width: 550px) {
+
     .nav-div {
         margin-top: 60px;
     }

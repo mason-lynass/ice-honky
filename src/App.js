@@ -1,6 +1,4 @@
 import './CSS/App.css';
-// import OneGame from './components/OneGame';
-import AllGames from './components/AllGames';
 // import { useState, useEffect } from "react"
 import NavBar from './components/NavBar'
 import { Route, Routes } from "react-router-dom"
@@ -13,6 +11,7 @@ function App() {
 
   // this is like an import up there ^^, just importing the whole folder of mp3 horns 
   const [currentPage, setCurrentPage] = useState("")
+  const [volume, setVolume] = useState(false)
 
   function importHorns(r) {
     let horns = {};
@@ -30,13 +29,24 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar setCurrentPage={setCurrentPage} currentPage={currentPage}></NavBar>
+      <NavBar
+        setCurrentPage={setCurrentPage}
+        currentPage={currentPage}
+        volume={volume}
+        setVolume={setVolume}>
+      </NavBar>
       <header>
         <h1 id='title'>📢 IceHonky.Net</h1>
       </header>
       <Routes>
         <Route
-          element={<DateCheck setCurrentPage={setCurrentPage} logos={logos} horns={horns} />}
+          element={<DateCheck
+            setCurrentPage={setCurrentPage}
+            logos={logos}
+            horns={horns}
+            volume={volume}
+            setVolume={setVolume}
+          />}
           path="/"
         >
         </Route>
