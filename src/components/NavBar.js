@@ -13,20 +13,6 @@ function NavBar({ currentPage, setCurrentPage, volume, setVolume }) {
         }
     }
 
-    function handleSoundClick() {
-        if (!volume) {
-            puck()
-        }
-        setVolume(!volume)   
-    }
-
-    function soundButton() {
-        return (
-            <button id='soundButton' onClick={handleSoundClick}>
-                {volume ? "🔊" : "🔇"}
-            </button>
-        )
-    }
 
     function hornButton() {
         if (currentPage === "horns") {
@@ -98,7 +84,7 @@ function NavBar({ currentPage, setCurrentPage, volume, setVolume }) {
 
     return (
         <div className="nav-div">
-            {currentPage === "home" ? soundButton() : null}
+            {/* {currentPage === "home" ? soundButton() : null} */}
             {aboutButton()}
             {hornButton()}
         </div>

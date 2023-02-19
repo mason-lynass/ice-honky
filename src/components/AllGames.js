@@ -2,15 +2,20 @@ import OneGame from "./OneGame"
 import RecentGoal from "./RecentGoal"
 import "../CSS/AllGames.css"
 import { useState, useEffect, useRef } from "react"
+import puckSound from "../audio/mp3s/a.pucksound.mp3"
+import useSound from "use-sound"
 
 function AllGames({ horns, logos, volume, setVolume }) {
+
+    const [puck] = useSound(puckSound)
 
     const [scores, setScores] = useState({})
     const [scoresLoaded, setScoresLoaded] = useState(false)
     const [recentGoalVisible, setRecentGoalVisible] = useState(false)
-    
+
     const volumeRef = useRef(volume)
     volumeRef.current = volume
+    
     const [teamWGoals, setTeamWGoals] = useState({})
     const [doubleGoalSameTeam, setDoubleGoalSameTeam] = useState(false)
 
@@ -78,7 +83,7 @@ function AllGames({ horns, logos, volume, setVolume }) {
     }
 
     // you can use this one to test multiple goals
-    let freshGoalsArray = [['COL', 4], ['STL', 1]]
+    // let freshGoalsArray = [['COL', 4], ['STL', 1]]
     // let freshGoalsArray = []
 
     function refresh() {
@@ -86,7 +91,7 @@ function AllGames({ horns, logos, volume, setVolume }) {
             if (r.ok) {
                 r.json().then((scores) => {
 
-                    // freshGoalsArray = []
+                    let freshGoalsArray = []
                     setScores(scores)
                     console.log("additional fetch!")
 
@@ -210,6 +215,22 @@ function AllGames({ horns, logos, volume, setVolume }) {
     //     )
     // }
 
+
+    function handleSoundClick() {
+        if (!volume) {
+            puck()
+        }
+        setVolume(!volume)
+    }
+
+    function soundButton() {
+        return (
+            <button id='soundButton' onClick={handleSoundClick}>
+                {volume ? "🔊" : "🔇"}
+            </button>
+        )
+    }
+
     function soundTeamHorn(abb) {
         if (volumeRef.current) {
             const teamHornArray = Object.entries(horns).filter((horn) => horn[0] === abb)
@@ -231,7 +252,7 @@ function AllGames({ horns, logos, volume, setVolume }) {
                                 doubleGoalSameTeam={doubleGoalSameTeam}
                             /> : "")}
 
-                        {/* {soundButton()} */}
+                        {soundButton()}
                         {AllTheGames()}
                     </div>
                     :
