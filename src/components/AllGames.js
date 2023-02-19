@@ -15,11 +15,9 @@ function AllGames({ horns, logos, volume, setVolume }) {
 
     const volumeRef = useRef(volume)
     volumeRef.current = volume
-    
+
     const [teamWGoals, setTeamWGoals] = useState({})
     const [doubleGoalSameTeam, setDoubleGoalSameTeam] = useState(false)
-
-    console.log(volume)
 
     // initial fetch -- no buzzer sounds -- set up an object of all the current goals, so we know when to toot a horn
     let goalsObject = {}
@@ -83,7 +81,7 @@ function AllGames({ horns, logos, volume, setVolume }) {
     }
 
     // you can use this one to test multiple goals
-    // let freshGoalsArray = [['COL', 4], ['STL', 1]]
+    let freshGoalsArray = [['DAL', 4]]
     // let freshGoalsArray = []
 
     function refresh() {
@@ -91,7 +89,7 @@ function AllGames({ horns, logos, volume, setVolume }) {
             if (r.ok) {
                 r.json().then((scores) => {
 
-                    let freshGoalsArray = []
+                    // let freshGoalsArray = []
                     setScores(scores)
                     console.log("additional fetch!")
 
@@ -215,10 +213,16 @@ function AllGames({ horns, logos, volume, setVolume }) {
     //     )
     // }
 
-
+    const [activeHorn, setActiveHorn] = useState()
+    let hornPlaying
+  
     function handleSoundClick() {
         if (!volume) {
             puck()
+        }
+        if (volume) {
+            hornPlaying = activeHorn
+            hornPlaying.pause()
         }
         setVolume(!volume)
     }
@@ -234,7 +238,9 @@ function AllGames({ horns, logos, volume, setVolume }) {
     function soundTeamHorn(abb) {
         if (volumeRef.current) {
             const teamHornArray = Object.entries(horns).filter((horn) => horn[0] === abb)
-            return new Audio(teamHornArray[0][1]).play()
+            hornPlaying = new Audio(teamHornArray[0][1])
+            setActiveHorn(hornPlaying)
+            return hornPlaying.play()
         }
     }
 
