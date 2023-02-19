@@ -2,6 +2,7 @@ function RecentGoal({ scores, teamWGoals, handleCloseRG, logos, doubleGoalSameTe
 
     // the team that scored
     const team = Object.values(teamWGoals)
+    console.log(teamWGoals)
 
     const gameWeCareAbout = scores.games.filter((game) => game.teams.away.abbreviation === team[0] || game.teams.home.abbreviation === team[0])
 
@@ -19,7 +20,7 @@ function RecentGoal({ scores, teamWGoals, handleCloseRG, logos, doubleGoalSameTe
     }
 
     const latestGoal = (teamGoals.slice(sliceAmt()))[0]
-    const player = latestGoal.scorer.player
+    let player = latestGoal.scorer.player
     let playerTotal = latestGoal.scorer.seasonTotal
     if (player === null) {
         player = ""

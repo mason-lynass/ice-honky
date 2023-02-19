@@ -49,6 +49,7 @@ function AllGames({ horns, logos }) {
     let timeout2
     useEffect(() => {
         const date = new Date()
+        // only do the refresh at times when games are expected to be happening
         if (date.getUTCHours() <= 8 || date.getUTCHours() >= 17) {
             timeout2 = setTimeout(() => {
                 refresh()
@@ -62,7 +63,6 @@ function AllGames({ horns, logos }) {
 
     // to show the team that just scored in a big box,
     // close that big box, and blur behind the box
-
     const behind = document.querySelector("body")
     function handleCloseRG() {
         behind.classList.remove("behindBlur")
@@ -79,15 +79,13 @@ function AllGames({ horns, logos }) {
         }
     })
 
-
-
     function refresh() {
         fetch("https://nhl-score-api.herokuapp.com/api/scores/latest").then((r) => {
             if (r.ok) {
                 r.json().then((scores) => {
 
                     // you can use this one to test multiple goals
-                    // let freshGoalsArray = [['TOR', 5], ['TOR', 4]]
+                    // let freshGoalsArray = [['ARI', 1], ['LAK', 2]]
                     let freshGoalsArray = []
                     setScores(scores)
                     console.log("additional fetch!")
@@ -96,7 +94,7 @@ function AllGames({ horns, logos }) {
                     let sorted = []
                     let sortedUpdateObject = {}
                     //create updateObject to compare to the goalsObject. if a team has a different score, toot their horn
-                    scores.games.forEach((game) => {
+                    scores.games.map((game) => {
                         sorted.push(Object.keys(game.scores)[0])
                         sorted.push(Object.keys(game.scores)[1])
                         sorted.sort()
@@ -107,26 +105,42 @@ function AllGames({ horns, logos }) {
                         updateObject[Object.keys(game.scores)[1]] = Object.values(game.scores)[1]
                     })
 
-                    sorted.forEach((team) => {
+                    sorted.map((team) => {
                         sortedUpdateObject[team] = updateObject[team]
                     })
+
+                    console.log(sortedGoalsObject, sortedUpdateObject)
+
+                    // sortedGoalsObject = {ARI: 1,BOS: 6,BUF: 1,CAR: 4,CBJ: 4,CGY: 2,COL: 4,DAL: 1,DET: 1,FLA: 3,LAK: 5,MTL: 1,NJD: 5,NSH: 7,NYI: 2,NYR: 0,PHI: 0,PIT: 2,SEA: 1,SJS: 1,STL: 1,TBL: 2,TOR: 5,VAN: 1,VGK: 4, WSH: 1}
+
+                    // sortedUpdateObject = 
+                    // {ARI: 1,BOS: 6,BUF: 1,CAR: 4,CBJ: 4,CGY: 2,COL: 4,DAL: 1,DET: 1,FLA: 3,LAK: 5,MTL: 1,NJD: 5,NSH: 7,NYI: 2,NYR: 0,PHI: 1,PIT: 2,SEA: 1,SJS: 1,STL: 1,TBL: 2,TOR: 5,VAN: 2,VGK: 4,WSH: 1}
+
 
                     let teamIdx = 0
                     while (teamIdx < Object.keys(sortedUpdateObject).length) {
                         // if the new goals object (updateObject) does not equal the goalsObject that means somebody scored, and we need to toot a horn
-                        if (Object.values(sortedUpdateObject)[teamIdx] !== Object.values(sortedGoalsObject)[teamIdx]) {
+                        const team = Object.keys(sortedUpdateObject)[teamIdx]
+                        const oldScore = Object.values(sortedGoalsObject)[teamIdx]
+                        const newScore = Object.values(sortedUpdateObject)[teamIdx]
+                        console.log(team, oldScore, newScore)
 
-                            console.log(Object.keys(sortedUpdateObject)[teamIdx], "scored goal number: ", Object.values(sortedUpdateObject)[teamIdx], "@", Date.now())
-                            sortedGoalsObject = sortedUpdateObject
-                            freshGoalsArray.push(Object.entries(sortedGoalsObject)[teamIdx])
-
+                        if (newScore !== oldScore) {
+                            for (let i = oldScore + 1; i <= newScore; i++) {
+                                console.log(team, "scored goal number: ", i, "@", Date.now())
+                                freshGoalsArray.push([team, i])
+                            }
+                            // console.log(Object.keys(sortedUpdateObject)[teamIdx], "scored goal number: ", Object.values(sortedUpdateObject)[teamIdx], "@", Date.now())
+                            // sortedGoalsObject[teamIdx] = sortedUpdateObject[teamIdx]
+                            // freshGoalsArray.push(Object.entries(sortedGoalsObject)[teamIdx])
                         } else {
                             setRecentGoalVisible(false)
                             behind.classList.remove("behindBlur")
-                            console.log(Object.keys(sortedUpdateObject)[teamIdx], "didn't score since last check")
+                            console.log(team, "didn't score since last check")
                         }
                         teamIdx = teamIdx + 1
                     }
+                    sortedGoalsObject = sortedUpdateObject
                     const sameTeam = {}
                     freshGoalsArray.forEach((goal) => {
                         if (!sameTeam[goal[0]]) {
@@ -135,17 +149,14 @@ function AllGames({ horns, logos }) {
                     })
                     // this will happen every time someone scores, and start immediately
                     if (freshGoalsArray.length > 0) {
-
                         soundTeamHorn(freshGoalsArray[0][0])
-                        // soundTeamHorn(freshGoalsArray[0][0])
                         setTeamWGoals(freshGoalsArray[0])
                         showRecentGoal()
-
                     }
                     // if there are multiple goals in the same refresh:
                     if (freshGoalsArray.length > 1) {
                         // a new array of goals without the first goal (we took care of that in the earlier "if")
-                        const extraGoals = [...freshGoalsArray].splice(0, 1)
+                        const extraGoals = [...freshGoalsArray].slice(1)
                         let goalNumber = 0
                         // for each goal in the extraGoals array, sound the horn and show the goal
                         // after the first goal is shown and heard
@@ -170,13 +181,18 @@ function AllGames({ horns, logos }) {
             }
         })
         // how often do you want the site to request scores from the API?
-        timeout1 = setTimeout(refresh, 30 * 1000)
+        timeout1 = setTimeout(refresh, 300 * 1000)
     }
 
     function AllTheGames() {
+        const gamesOrdered = []
+        const activeGames = scores.games.filter((game) => game.status.state === "LIVE")
+        activeGames.forEach((game) => gamesOrdered.push(game))
+        const nonActiveGames = scores.games.filter((game) => game.status.state !== "LIVE")
+        nonActiveGames.forEach((game) => gamesOrdered.push(game))
         return (
             (scores.games.length > 0) ?
-                scores.games.map((game) => {
+                gamesOrdered.map((game) => {
                     return (
                         <OneGame key={game.teams.home.abbreviation} horns={horns} game={game} logos={logos} />
                     )
@@ -189,6 +205,8 @@ function AllGames({ horns, logos }) {
                 </div>
         )
     }
+
+    console.log(volume)
 
     function handleSoundClick() {
         if (document.querySelector(`.activeSoundButton`)) {
