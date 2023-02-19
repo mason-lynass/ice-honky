@@ -6,7 +6,7 @@ function RecentGoal({ scores, teamWGoals, handleCloseRG, logos, doubleGoalSameTe
     const gameWeCareAbout = scores.games.filter((game) => game.teams.away.abbreviation === team[0] || game.teams.home.abbreviation === team[0])
 
     const teamGoals = []
-
+console.log(gameWeCareAbout[0])
     gameWeCareAbout[0].goals.forEach((goal) => {
         if (goal.team === team[0]) {
             teamGoals.push(goal)

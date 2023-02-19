@@ -81,7 +81,7 @@ function AllGames({ horns, logos, volume, setVolume }) {
     }
 
     // you can use this one to test multiple goals
-    let freshGoalsArray = [['DAL', 4]]
+    // let freshGoalsArray = [['MIN', 4]]
     // let freshGoalsArray = []
 
     function refresh() {
@@ -89,7 +89,7 @@ function AllGames({ horns, logos, volume, setVolume }) {
             if (r.ok) {
                 r.json().then((scores) => {
 
-                    // let freshGoalsArray = []
+                    let freshGoalsArray = []
                     setScores(scores)
                     console.log("additional fetch!")
 
@@ -220,7 +220,7 @@ function AllGames({ horns, logos, volume, setVolume }) {
         if (!volume) {
             puck()
         }
-        if (volume) {
+        if (volume && activeHorn) {
             hornPlaying = activeHorn
             hornPlaying.pause()
         }
@@ -230,7 +230,9 @@ function AllGames({ horns, logos, volume, setVolume }) {
     function soundButton() {
         return (
             <button id='soundButton' onClick={handleSoundClick}>
-                {volume ? "🔊" : "🔇"}
+                {volume ? <span>🔊</span> : <span>🔇</span>}
+                <br></br>
+                <span>Sound on/off</span>
             </button>
         )
     }
