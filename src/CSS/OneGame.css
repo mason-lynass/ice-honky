@@ -168,70 +168,15 @@ hr {
   }
 
   @media (max-width: 627px) {
-    /* .infoFlex {
-        padding-top: 20px;
-    } */
+
     .oneGame {
         width: 505px;
         min-height: 300px;
     }
-    .awayTeamInfo, .homeTeamInfo {
-        width: 100px;
-        border: 2px solid black;
-    }
-    .awayLogo, .homeLogo {
-        width: 100px;
-    }
-    .awayTeamInfo, .homeTeamInfo {
-        width: 200px;
-    }
-    
-    .awayTeamName, .homeTeamName {
-        margin-bottom: 0;
-        font-size: 10px;
-    }
-
-    .gameStatus {
-        margin: 5px;
-    }
-    
-    .gameProgress {
-        margin: 0;
-    }
-
-    .gameScore {
-        font-size: 30px;
-    }
-
-    .oneTeamGoals {
-        margin: 0px 0;
-        width: 240px;
-    }
-    
-    .oneGoal {
-        margin: 2px;
-        margin-bottom: 1px;
-        font-size: 12px;
-        height: 18px;
-        padding-bottom: 0px;
-    }
-
-    .player-goal-background {
-        border: 1px solid black;
-    }
-
-    .awayRecord {
-        font-size: 10px;
-        margin-bottom: 5px;
-    }
-
-    .homeRecord {
-        font-size: 10px;
-        margin-bottom: 5px;
-    }
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 550px) {
+
     .nav-div {
         margin-top: 60px;
     }

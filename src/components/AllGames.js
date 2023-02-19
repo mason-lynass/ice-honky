@@ -13,6 +13,7 @@ function AllGames({ horns, logos, volume, setVolume }) {
     const [scoresLoaded, setScoresLoaded] = useState(false)
     const [recentGoalVisible, setRecentGoalVisible] = useState(false)
 
+
     const volumeRef = useRef(volume)
     volumeRef.current = volume
 
@@ -80,14 +81,20 @@ function AllGames({ horns, logos, volume, setVolume }) {
         setRecentGoalVisible(true)
     }
 
-    // you can use this one to test multiple goals
-    // let freshGoalsArray = [['MIN', 4]]
-    // let freshGoalsArray = []
+    useEffect(() => {
+        behind.addEventListener('click', handleCloseRG)
+        return () => {
+            behind.removeEventListener('click', handleCloseRG)
+        }
+    })
 
     function refresh() {
         fetch("https://nhl-score-api.herokuapp.com/api/scores/latest").then((r) => {
             if (r.ok) {
                 r.json().then((scores) => {
+
+                    // you can use this one to test multiple goals
+                    // let freshGoalsArray = [['ARI', 1], ['LAK', 2]]
 
                     let freshGoalsArray = []
                     setScores(scores)
@@ -111,21 +118,40 @@ function AllGames({ horns, logos, volume, setVolume }) {
                         sortedUpdateObject[team] = updateObject[team]
                     })
 
+                    console.log(sortedGoalsObject, sortedUpdateObject)
+
+                    // sortedGoalsObject = {ARI: 1,BOS: 6,BUF: 1,CAR: 4,CBJ: 4,CGY: 2,COL: 4,DAL: 1,DET: 1,FLA: 3,LAK: 5,MTL: 1,NJD: 5,NSH: 7,NYI: 2,NYR: 0,PHI: 0,PIT: 2,SEA: 1,SJS: 1,STL: 1,TBL: 2,TOR: 5,VAN: 1,VGK: 4, WSH: 1}
+
+                    // sortedUpdateObject = 
+                    // {ARI: 1,BOS: 6,BUF: 1,CAR: 4,CBJ: 4,CGY: 2,COL: 4,DAL: 1,DET: 1,FLA: 3,LAK: 5,MTL: 1,NJD: 5,NSH: 7,NYI: 2,NYR: 0,PHI: 1,PIT: 2,SEA: 1,SJS: 1,STL: 1,TBL: 2,TOR: 5,VAN: 2,VGK: 4,WSH: 1}
+
+
                     let teamIdx = 0
                     while (teamIdx < Object.keys(sortedUpdateObject).length) {
-                        // if the new goals object (updateObject) does not equal the goalsObject that means somebody scored, add that goal to the freshGoalsArray
-                        if (Object.values(sortedUpdateObject)[teamIdx] !== Object.values(sortedGoalsObject)[teamIdx]) {
+                        // if the new goals object (updateObject) does not equal the goalsObject that means somebody scored, and we need to toot a horn
+                        const team = Object.keys(sortedUpdateObject)[teamIdx]
+                        const oldScore = Object.values(sortedGoalsObject)[teamIdx]
+                        const newScore = Object.values(sortedUpdateObject)[teamIdx]
+                        console.log(team, oldScore, newScore)
 
-                            console.log(Object.keys(sortedUpdateObject)[teamIdx], "scored goal number: ", Object.values(sortedUpdateObject)[teamIdx], "@", Date.now())
-                            sortedGoalsObject = sortedUpdateObject
-                            freshGoalsArray.push(Object.entries(sortedGoalsObject)[teamIdx])
+                        if (newScore !== oldScore) {
+                            for (let i = oldScore + 1; i <= newScore; i++) {
+                                console.log(team, "scored goal number: ", i, "@", Date.now())
+                                freshGoalsArray.push([team, i])
+                            }
+                            // console.log(Object.keys(sortedUpdateObject)[teamIdx], "scored goal number: ", Object.values(sortedUpdateObject)[teamIdx], "@", Date.now())
+                            // sortedGoalsObject[teamIdx] = sortedUpdateObject[teamIdx]
+                            // freshGoalsArray.push(Object.entries(sortedGoalsObject)[teamIdx])
+
                         } else {
                             setRecentGoalVisible(false)
                             behind.classList.remove("behindBlur")
-                            console.log(Object.keys(sortedUpdateObject)[teamIdx], "didn't score since last check")
+                            console.log(team, "didn't score since last check")
                         }
                         teamIdx = teamIdx + 1
                     }
+                    sortedGoalsObject = sortedUpdateObject
+                    
 
                     // check if same team is in freshGoalsArray more than once, setDoubleGoalSameTeam to true. if it's true, RecentGoal.js has a function where it will display the second most recent goal. doubleGoalSameTeam will get set to false within the extraGoalsTimer
                     const sameTeam = {}
@@ -134,6 +160,8 @@ function AllGames({ horns, logos, volume, setVolume }) {
                             sameTeam[goal[0]] = 1
                         } else setDoubleGoalSameTeam(true)
                     })
+                    
+                    
                     // this will happen every time someone scores, and start immediately
                     if (freshGoalsArray.length > 0) {
 
@@ -173,13 +201,18 @@ function AllGames({ horns, logos, volume, setVolume }) {
             }
         })
         // how often do you want the site to request scores from the API?
-        timeout1 = setTimeout(refresh, 30 * 1000)
+        timeout1 = setTimeout(refresh, 300 * 1000)
     }
 
     function AllTheGames() {
+        const gamesOrdered = []
+        const activeGames = scores.games.filter((game) => game.status.state === "LIVE")
+        activeGames.forEach((game) => gamesOrdered.push(game))
+        const nonActiveGames = scores.games.filter((game) => game.status.state !== "LIVE")
+        nonActiveGames.forEach((game) => gamesOrdered.push(game))
         return (
             (scores.games.length > 0) ?
-                scores.games.map((game) => {
+                gamesOrdered.map((game) => {
                     return (
                         <OneGame key={game.teams.home.abbreviation} horns={horns} game={game} logos={logos} />
                     )
@@ -192,6 +225,7 @@ function AllGames({ horns, logos, volume, setVolume }) {
                 </div>
         )
     }
+
 
     // function handleSoundClick() {
     //     if (volume) {

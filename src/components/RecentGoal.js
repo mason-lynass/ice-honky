@@ -2,11 +2,12 @@ function RecentGoal({ scores, teamWGoals, handleCloseRG, logos, doubleGoalSameTe
 
     // the team that scored
     const team = Object.values(teamWGoals)
+    console.log(teamWGoals)
 
     const gameWeCareAbout = scores.games.filter((game) => game.teams.away.abbreviation === team[0] || game.teams.home.abbreviation === team[0])
 
     const teamGoals = []
-console.log(gameWeCareAbout[0])
+
     gameWeCareAbout[0].goals.forEach((goal) => {
         if (goal.team === team[0]) {
             teamGoals.push(goal)
@@ -19,7 +20,9 @@ console.log(gameWeCareAbout[0])
     }
 
     const latestGoal = (teamGoals.slice(sliceAmt()))[0]
-    const player = latestGoal.scorer.player
+
+    let player = latestGoal.scorer.player
+
     let playerTotal = latestGoal.scorer.seasonTotal
     if (player === null) {
         player = ""
@@ -54,7 +57,7 @@ console.log(gameWeCareAbout[0])
     function showAssists() {
 
         return (
-            ( assists !== undefined && assists.length > 0) ?
+            (assists !== undefined && assists.length > 0) ?
                 assists.map((ast) => {
                     const player = ast.player
                     const total = ast.seasonTotal
@@ -69,7 +72,7 @@ console.log(gameWeCareAbout[0])
     }
 
     return (
-        <div id="recentGoalContainer">
+        <div id="recentGoalContainer" onClick={e => e.stopPropagation()}>
             <button id="RGClose" onClick={handleCloseRG}>x</button>
             <div id='recentGoal'>
                 <h1>{latestGoal.team} just scored!</h1>
