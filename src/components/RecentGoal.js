@@ -19,7 +19,8 @@ function RecentGoal({ scores, teamWGoals, handleCloseRG, logos, doubleGoalSameTe
     }
 
     const latestGoal = (teamGoals.slice(sliceAmt()))[0]
-    const player = latestGoal.scorer.player
+    
+    let player = latestGoal.scorer.player
     let playerTotal = latestGoal.scorer.seasonTotal
     if (player === null) {
         player = ""

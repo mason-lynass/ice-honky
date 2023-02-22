@@ -1,16 +1,22 @@
 import OneGame from "./OneGame"
 import RecentGoal from "./RecentGoal"
 import "../CSS/AllGames.css"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
+import puckSound from "../audio/mp3s/a.pucksound.mp3"
+import useSound from "use-sound"
 
-function AllGames({ horns, logos }) {
+function AllGames({ horns, logos, volume, setVolume }) {
+
+    const [puck] = useSound(puckSound)
 
     const [scores, setScores] = useState({})
     const [scoresLoaded, setScoresLoaded] = useState(false)
     const [recentGoalVisible, setRecentGoalVisible] = useState(false)
-    const [volume, setVolume] = useState(false)
     const [teamWGoals, setTeamWGoals] = useState({})
     const [doubleGoalSameTeam, setDoubleGoalSameTeam] = useState(false)
+
+    const volumeRef = useRef(volume)
+    volumeRef.current = volume
 
     // initial fetch -- no buzzer sounds -- set up an object of all the current goals, so we know when to toot a horn
     let goalsObject = {}
@@ -49,6 +55,7 @@ function AllGames({ horns, logos }) {
     let timeout2
     useEffect(() => {
         const date = new Date()
+        // only do the refresh at times when games are expected to be happening
         if (date.getUTCHours() <= 8 || date.getUTCHours() >= 17) {
             timeout2 = setTimeout(() => {
                 refresh()
@@ -62,7 +69,6 @@ function AllGames({ horns, logos }) {
 
     // to show the team that just scored in a big box,
     // close that big box, and blur behind the box
-
     const behind = document.querySelector("body")
     function handleCloseRG() {
         behind.classList.remove("behindBlur")
@@ -72,14 +78,13 @@ function AllGames({ horns, logos }) {
         behind.classList.add("behindBlur")
         setRecentGoalVisible(true)
     }
+
     useEffect(() => {
         behind.addEventListener('click', handleCloseRG)
         return () => {
             behind.removeEventListener('click', handleCloseRG)
         }
     })
-
-
 
     function refresh() {
         fetch("https://nhl-score-api.herokuapp.com/api/scores/latest").then((r) => {
@@ -111,22 +116,34 @@ function AllGames({ horns, logos }) {
                         sortedUpdateObject[team] = updateObject[team]
                     })
 
+                    // console.log(sortedGoalsObject, sortedUpdateObject)
+
                     let teamIdx = 0
                     while (teamIdx < Object.keys(sortedUpdateObject).length) {
                         // if the new goals object (updateObject) does not equal the goalsObject that means somebody scored, and we need to toot a horn
-                        if (Object.values(sortedUpdateObject)[teamIdx] !== Object.values(sortedGoalsObject)[teamIdx]) {
+                        const team = Object.keys(sortedUpdateObject)[teamIdx]
+                        const oldScore = Object.values(sortedGoalsObject)[teamIdx]
+                        const newScore = Object.values(sortedUpdateObject)[teamIdx]
 
-                            console.log(Object.keys(sortedUpdateObject)[teamIdx], "scored goal number: ", Object.values(sortedUpdateObject)[teamIdx], "@", Date.now())
-                            sortedGoalsObject = sortedUpdateObject
-                            freshGoalsArray.push(Object.entries(sortedGoalsObject)[teamIdx])
+                        // console.log(team, oldScore, newScore)
+
+                        if (newScore !== oldScore) {
+                            for (let i = oldScore + 1; i <= newScore; i++) {
+                                console.log(team, "scored goal number: ", i, "@", Date.now())
+                                freshGoalsArray.push([team, i])
+                            }
 
                         } else {
                             setRecentGoalVisible(false)
                             behind.classList.remove("behindBlur")
-                            console.log(Object.keys(sortedUpdateObject)[teamIdx], "didn't score since last check")
+                            console.log(team, "didn't score since last check")
                         }
                         teamIdx = teamIdx + 1
                     }
+                    sortedGoalsObject = sortedUpdateObject
+
+                    // check if same team is in freshGoalsArray more than once, setDoubleGoalSameTeam to true. if it's true, RecentGoal.js has a function where it will display the second most recent goal. doubleGoalSameTeam will get set to false within the extraGoalsTimer
+
                     const sameTeam = {}
                     freshGoalsArray.forEach((goal) => {
                         if (!sameTeam[goal[0]]) {
@@ -145,7 +162,7 @@ function AllGames({ horns, logos }) {
                     // if there are multiple goals in the same refresh:
                     if (freshGoalsArray.length > 1) {
                         // a new array of goals without the first goal (we took care of that in the earlier "if")
-                        const extraGoals = [...freshGoalsArray].splice(0, 1)
+                        const extraGoals = [...freshGoalsArray].slice(1)
                         let goalNumber = 0
                         // for each goal in the extraGoals array, sound the horn and show the goal
                         // after the first goal is shown and heard
@@ -160,12 +177,6 @@ function AllGames({ horns, logos }) {
                         }, (30 / freshGoalsArray.length) * 1000)
                         setTimeout(() => { clearInterval(extraGoalsTimer) }, 29000)
                     }
-                    // this does not yet work when 2 or more goals are scored by the same team
-                    // (which will be very rare, but could happen!)
-                    // because we're showing the recentGoal by filtering "scores" -
-                    // finding the game by comparing game teams to sortedUpdateObject[teamIdx],
-                    // then displaying the last goal in the array of goals.
-                    // in this case, I'm pretty sure it will display the last goal 2 (or more) times
                 })
             }
         })
@@ -174,9 +185,14 @@ function AllGames({ horns, logos }) {
     }
 
     function AllTheGames() {
+        const gamesOrdered = []
+        const activeGames = scores.games.filter((game) => game.status.state === "LIVE")
+        activeGames.forEach((game) => gamesOrdered.push(game))
+        const nonActiveGames = scores.games.filter((game) => game.status.state !== "LIVE")
+        nonActiveGames.forEach((game) => gamesOrdered.push(game))
         return (
             (scores.games.length > 0) ?
-                scores.games.map((game) => {
+                gamesOrdered.map((game) => {
                     return (
                         <OneGame key={game.teams.home.abbreviation} horns={horns} game={game} logos={logos} />
                     )
@@ -190,29 +206,58 @@ function AllGames({ horns, logos }) {
         )
     }
 
+    // function handleSoundClick() {
+    //     if (volume) {
+    //         const sound = document.getElementById(`soundButton`)
+    //         sound.classList.remove('activeSoundButton')
+    //         setVolume(false)
+    //     } else {
+    //         const sound = document.getElementById(`soundButton`)
+    //         sound.classList.add('activeSoundButton')
+    //         setVolume(true)
+    //     }
+    // }
+
+    // function soundButton() {
+    //     return (
+    //         <button id='soundButton' onClick={handleSoundClick}>
+    //             {(volume === true) ? "sound on" : "sound off"}
+    //         </button>
+    //     )
+    // }
+
+    const [activeHorn, setActiveHorn] = useState()
+    let hornPlaying
+
     function handleSoundClick() {
-        if (document.querySelector(`.activeSoundButton`)) {
-            const sound = document.getElementById(`soundButton`)
-            sound.classList.remove('activeSoundButton')
-            setVolume(false)
-        } else if (document.getElementById(`soundButton`)) {
-            const sound = document.getElementById(`soundButton`)
-            sound.classList.add('activeSoundButton')
-            setVolume(true)
+        if (!volume) {
+            puck()
         }
+        if (volume && activeHorn) {
+            hornPlaying = activeHorn
+            hornPlaying.pause()
+        }
+        setVolume(!volume)
     }
 
     function soundButton() {
         return (
             <button id='soundButton' onClick={handleSoundClick}>
                 {(volume === true) ? "sound on" : "sound off"}
+                {volume ? <span>🔊</span> : <span>🔇</span>}
+                <br></br>
+                <span>Sound on/off</span>
             </button>
         )
     }
 
     function soundTeamHorn(abb) {
-        const teamHornArray = Object.entries(horns).filter((horn) => horn[0] === abb)
-        return new Audio(teamHornArray[0][1]).play()
+        if (volumeRef.current) {
+            const teamHornArray = Object.entries(horns).filter((horn) => horn[0] === abb)
+            hornPlaying = new Audio(teamHornArray[0][1])
+            setActiveHorn(hornPlaying)
+            return hornPlaying.play()
+        }
     }
 
 
@@ -229,11 +274,9 @@ function AllGames({ horns, logos }) {
                                 handleCloseRG={handleCloseRG}
                                 doubleGoalSameTeam={doubleGoalSameTeam}
                             /> : "")}
-
                         {soundButton()}
                         {AllTheGames()}
                     </div>
-
                     :
                     <h2>loading...</h2>}
             </div>
