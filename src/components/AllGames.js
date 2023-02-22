@@ -243,7 +243,6 @@ function AllGames({ horns, logos, volume, setVolume }) {
     function soundButton() {
         return (
             <button id='soundButton' onClick={handleSoundClick}>
-                {(volume === true) ? "sound on" : "sound off"}
                 {volume ? <span>🔊</span> : <span>🔇</span>}
                 <br></br>
                 <span>Sound on/off</span>
