@@ -9,7 +9,7 @@ body {
 #title {
   font-family: "Faster One", cursive;
   font-size: 3rem;
-  margin-top: 0;
+  margin: 0 auto;
 }
 
 .nav-div {
@@ -112,3 +112,63 @@ body {
     font-size: 35px;
   }
 }
+
+#soundButton {
+  /* position: absolute; */
+  top: 0px;
+  left: 0px;
+  border: 2px solid black;
+  font-family: 'Oswald';
+  width: 90px;
+  height: 80px;
+  margin: 20px;
+  border-radius: 20px;
+  /* padding: 5px; */
+  font-size: 2rem;
+  margin-bottom: -2px;
+  transition: background-color .7s;
+  padding: -10px;
+  margin: 0;
+  margin-top: 10px;
+}
+
+#soundButton:hover {
+  background-color: rgb(210, 210, 210);
+}
+
+#soundButton:active {
+  filter: invert(100%);
+}
+
+#soundButton span {
+  font-size: .9rem;
+  vertical-align: top;
+}
+
+#soundButton span:first-of-type {
+  font-size: 2rem;
+  margin-bottom: -10px;
+  margin-top: -10px;
+}
+
+@media screen and (max-width: 500px) {
+  #soundButton {
+
+      font-size: 1.5rem;
+      width: 70px;
+      height: 62px;
+      border-radius: 12px;
+  }
+  #soundButton span {
+    font-size: .7rem;
+    vertical-align: top;
+  }
+  #soundButton span:first-of-type {
+    font-size: 1.5rem;
+    margin-bottom: -10px;
+  }
+}
+
+/* .activeSoundButton::after {
+  content: "   🔊"
+} */
