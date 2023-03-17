@@ -10,6 +10,7 @@ body {
   font-family: "Faster One", cursive;
   font-size: 3rem;
   margin: 0 auto;
+  font-display: swap;
 }
 
 .nav-div {

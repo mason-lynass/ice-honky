@@ -55,7 +55,7 @@ function AllGames({ horns, logos, volume, setVolume }) {
     let timeout2
     useEffect(() => {
         const date = new Date()
-        // only do the refresh at times when games are expected to be happening
+        // only do the refresh at during hours where games are expected to be happening
         if (date.getUTCHours() <= 8 || date.getUTCHours() >= 17) {
             timeout2 = setTimeout(() => {
                 refresh()
