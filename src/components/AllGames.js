@@ -15,6 +15,8 @@ function AllGames({ horns, logos, volume, setVolume }) {
     const [teamWGoals, setTeamWGoals] = useState({})
     const [doubleGoalSameTeam, setDoubleGoalSameTeam] = useState(false)
 
+    const [isScrolled, setIsScrolled] = useState(false)
+
     const volumeRef = useRef(volume)
     volumeRef.current = volume
 
@@ -22,6 +24,19 @@ function AllGames({ horns, logos, volume, setVolume }) {
     let goalsObject = {}
     const sortTeams = []
     let sortedGoalsObject = {}
+
+    useEffect(() => {
+        function handleScroll() {
+            setIsScrolled(true);
+        }
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    
+
     useEffect(() => {
 
         fetch("https://nhl-score-api.herokuapp.com/api/scores/latest").then((r) => {
@@ -242,7 +257,7 @@ function AllGames({ horns, logos, volume, setVolume }) {
 
     function soundButton() {
         return (
-            <button id='soundButton' onClick={handleSoundClick}>
+            <button className={`${isScrolled ? 'fixed-button' : ''}`} id='soundButton' onClick={handleSoundClick}>
                 {volume ? <span>🔊</span> : <span>🔇</span>}
                 <br></br>
                 <span>Sound on/off</span>
