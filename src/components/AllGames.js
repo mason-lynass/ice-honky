@@ -25,17 +25,22 @@ function AllGames({ horns, logos, volume, setVolume }) {
     const sortTeams = []
     let sortedGoalsObject = {}
 
-    useEffect(() => {
-        function handleScroll() {
+    function handleScroll() {
+        if (window.pageYOffset > 100) {
             setIsScrolled(true);
+        } else {
+            setIsScrolled(false);
         }
+    }
 
+
+    useEffect(() => {
         window.addEventListener('scroll', handleScroll);
 
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    
+
 
     useEffect(() => {
 
@@ -257,7 +262,7 @@ function AllGames({ horns, logos, volume, setVolume }) {
 
     function soundButton() {
         return (
-            <button className={`${isScrolled ? 'fixed-button' : ''}`} id='soundButton' onClick={handleSoundClick}>
+            <button id="soundButton" className={isScrolled ? "fixed-button" : ""} onClick={handleSoundClick}>
                 {volume ? <span>🔊</span> : <span>🔇</span>}
                 <br></br>
                 <span>Sound on/off</span>
