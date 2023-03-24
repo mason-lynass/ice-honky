@@ -9,7 +9,7 @@ function Offseason( {setCurrentPage} ) {
     return(
         <div>
             sorry, come back in october<br></br>
-            check out those horns tho
+            check out those horns tho eh?
         </div>
     )
 }
