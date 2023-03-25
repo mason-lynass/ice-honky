@@ -1,10 +1,13 @@
 .oneGame {
     /* border: 2px solid black; */
     /* border-radius: 30px; */
-    width: 800px;
+    width: 75%;
+    /* height: calc(75vw / 2); */
+    min-height: 400px;
+    min-width: 800px;
     margin: 20px auto;
     position: relative;
-    min-height: 400px;
+    
 }
 
 .oneGame::after {
@@ -37,15 +40,15 @@
 
 .awayTeamName,
 .homeTeamName {
-    margin-bottom: 0;
+    margin-bottom: -20px;
     font-size: 24px;
     font-family: "Oswald";
 }
 
-.awayLogo,
+/* .awayLogo,
 .homeLogo {
     height: 107px;
-}
+} */
 
 .awayRecord,
 .homeRecord {
@@ -96,7 +99,7 @@
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
-    gap: 10px;
+    gap: 5%;
 }
 
 hr {
@@ -119,6 +122,7 @@ hr {
 
     .oneGame {
         width: 600px;
+        min-width: 100px;
         min-height: 300px;
     }
 
@@ -156,6 +160,12 @@ hr {
         font-size: 30px;
     }
 
+    .gameGoals {
+        margin: 5px;
+        height: 130px;
+        overflow: scroll;
+    }
+
     .oneTeamGoals {
         margin: 0px 0;
         width: 240px;
@@ -187,18 +197,9 @@ hr {
         width: 80%;
         margin: 0 10%;
     }
-
 }
 
-@media (max-width: 627px) {
-
-    .oneGame {
-        width: 505px;
-        min-height: 300px;
-    }
-}
-
-@media (max-width: 550px) {
+@media (max-width: 600px) {
     .nav-div {
         margin-top: 30px;
     }
@@ -208,12 +209,9 @@ hr {
     }
 
     .oneGame {
-        width: 90%;
-        min-height: 160px;
+        width: 95%;
+        min-height: 47.5vw;
         padding: 5px 0;
-        border: 1px solid black;
-        border-radius: 10px;
-        background-color: white;
     }
 
     .awayTeamInfo,
@@ -232,10 +230,16 @@ hr {
     .awayTeamName,
     .homeTeamName {
         font-size: 10px;
+        margin-bottom: -15px;
     }
 
     .gameGoals {
         gap: 0;
+    }
+
+    .oneTeamGoals {
+        height: 67px;
+        overflow: scroll;
     }
 
     .gameStatus {
@@ -265,8 +269,6 @@ hr {
         padding: 3px 0;
     }
 
-    
-
     .oneGoal-mobile {
         height: 0px;
         margin: 0;
@@ -280,6 +282,7 @@ hr {
     .homeRecord {
         font-size: 10px;
         margin-bottom: 5px;
+        margin-top: -15px;
     }
 
 }

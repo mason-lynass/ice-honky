@@ -18,7 +18,6 @@ function DateCheck({ setCurrentPage, logos, horns, volume, setVolume }) {
 
     return (
         <>
-            <img id="BI" src={BG} alt="" />
             {hockeySeason() ?
                 <AllGames
                     setCurrentPage={setCurrentPage}

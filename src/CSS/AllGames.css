@@ -85,3 +85,35 @@
         /* left: 0%; */
     }
 }
+
+@media screen and (max-width: 600px) {
+    #recentGoalContainer {
+        width: 80%;
+        margin: 0 10%;
+        /* left: 0%; */
+    }
+
+    #RGLogo {
+        width: 70%;
+        margin: -30px;
+    }
+
+    #recentGoal {
+        margin: 40px auto;
+    }
+
+    #recentGoal h1 {
+        font-size: calc(6vw + 35%);
+    }
+
+    #recentGoal h3 {
+        margin: 20px auto;
+        font-size: calc(4vw + 35%);
+    }
+
+    .assist,
+    #allAssists {
+        font-size: calc(2vw + 35%);
+        display: block;
+    }
+}
