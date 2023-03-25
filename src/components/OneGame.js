@@ -35,10 +35,23 @@ function OneGame({ game, horns, logos }) {
 
   function teamGoals(goals, team) {
     if (mobileScreen.matches) {
-      goals = goals.splice(-3)
+      console.log(goals)
+      // const sortedGoals = goals.sort((a, b) => b.scorer.seasonTotal - a.scorer.seasonTotal)
+      // goals = goals.splice(-3)
+      return goals.map((goal) => {
+        let seasonTotal = `(${goal.scorer.seasonTotal})`
+        if (goal.period === 'SO') seasonTotal = ' - SO'
+        if (goal.team === team) {
+          return (
+            <div key={goal.scorer.player + seasonTotal} className="oneGoal player-goal-background">
+              <p>{goal.scorer.player} {seasonTotal}</p>
+            </div>
+          )
+        } else return (<p className="oneGoal-mobile"></p>)
+      })
     }
 
-    return goals.map((goal) => {
+    else return goals.map((goal) => {
 
       let second = goal.sec
       // catch for SO goals
@@ -58,18 +71,24 @@ function OneGame({ game, horns, logos }) {
       }
 
       let seasonTotal = `(${goal.scorer.seasonTotal})`
+      let goalBottom = `${seasonTotal} - ${goal.period}${time}`
       // simplifying text of SO goals
       if (period === `SO`) {
         seasonTotal = ``
         time = ``
         min = ``
+        goalBottom = `${goal.period}`
       }
+
+      
+
 
       if (goal.team === team) {
         return (
-          <p key={goal.scorer.player + time} className="oneGoal player-goal-background">
-            {goal.scorer.player} {seasonTotal} - {goal.period}{time}
-          </p>
+          <div key={goal.scorer.player + time} className="oneGoal player-goal-background">
+            <p>{goal.scorer.player}</p>
+            <p> {goalBottom}</p>
+          </div>
         )
       } else return (<p className="oneGoal"></p>)
     });

@@ -7,7 +7,7 @@
     min-height: 400px;
 }
 
-.oneGame::after{
+.oneGame::after {
     content: '';
     position: absolute;
     inset: 0;
@@ -27,24 +27,28 @@
     padding-top: 30px;
 }
 
-.awayTeamInfo, .homeTeamInfo {
+.awayTeamInfo,
+.homeTeamInfo {
     width: 250px;
     border: 3px solid black;
     background-color: white;
     border-radius: 10px;
 }
 
-.awayTeamName, .homeTeamName {
+.awayTeamName,
+.homeTeamName {
     margin-bottom: 0;
     font-size: 24px;
     font-family: "Oswald";
 }
 
-.awayLogo, .homeLogo {
+.awayLogo,
+.homeLogo {
     height: 107px;
 }
 
-.awayRecord, .homeRecord {
+.awayRecord,
+.homeRecord {
     margin: 0 0 20px 0;
 }
 
@@ -83,6 +87,11 @@
     padding: 5px 0;
 }
 
+.oneGoal p {
+    margin: 0;
+    display: inline;
+}
+
 .gameGoals {
     display: flex;
     flex-flow: row nowrap;
@@ -103,25 +112,34 @@ hr {
 }
 
 @media (max-width: 800px) {
+
     .infoFlex {
         padding-top: 20px;
     }
+
     .oneGame {
         width: 600px;
         min-height: 300px;
     }
-    .awayTeamInfo, .homeTeamInfo {
+
+    .awayTeamInfo,
+    .homeTeamInfo {
         width: 100px;
         border: 2px solid black;
     }
-    .awayLogo, .homeLogo {
+
+    .awayLogo,
+    .homeLogo {
         width: 100px;
     }
-    .awayTeamInfo, .homeTeamInfo {
+
+    .awayTeamInfo,
+    .homeTeamInfo {
         width: 200px;
     }
-    
-    .awayTeamName, .homeTeamName {
+
+    .awayTeamName,
+    .homeTeamName {
         margin-bottom: 0;
         font-size: 10px;
     }
@@ -129,7 +147,7 @@ hr {
     .gameStatus {
         margin: 5px;
     }
-    
+
     .gameProgress {
         margin: 0;
     }
@@ -142,7 +160,7 @@ hr {
         margin: 0px 0;
         width: 240px;
     }
-    
+
     .oneGoal {
         margin: 2px;
         margin-bottom: 1px;
@@ -164,51 +182,69 @@ hr {
         font-size: 10px;
         margin-bottom: 5px;
     }
-    
-  }
 
-  @media (max-width: 627px) {
+    .recentGoalContainer {
+        width: 80%;
+        margin: 0 10%;
+    }
+
+}
+
+@media (max-width: 627px) {
 
     .oneGame {
         width: 505px;
         min-height: 300px;
     }
-  }
+}
 
-  @media (max-width: 550px) {
+@media (max-width: 550px) {
     .nav-div {
-        margin-top: 60px;
+        margin-top: 30px;
     }
 
     .infoFlex {
         padding-top: 3px;
     }
+
     .oneGame {
-        width: 325px;
+        width: 90%;
         min-height: 160px;
+        padding: 5px 0;
+        border: 1px solid black;
+        border-radius: 10px;
+        background-color: white;
     }
-    .awayTeamInfo, .homeTeamInfo {
+
+    .awayTeamInfo,
+    .homeTeamInfo {
         width: 100px;
         border: 2px solid black;
+        margin-bottom: 10px;
     }
-    .awayLogo, .homeLogo {
-        width: 50px;
+
+    .awayLogo,
+    .homeLogo {
+        width: 80px;
+        height: 80px;
     }
-    .awayTeamInfo, .homeTeamInfo {
-        width: 100px;
-    }
-    
-    .awayTeamName, .homeTeamName {
-        margin-bottom: 0;
+
+    .awayTeamName,
+    .homeTeamName {
         font-size: 10px;
+    }
+
+    .gameGoals {
+        gap: 0;
     }
 
     .gameStatus {
         margin: 5px;
     }
-    
+
     .gameProgress {
         margin: 0;
+        font-size: 12px;
     }
 
     .gameScore {
@@ -219,27 +255,31 @@ hr {
         margin: 0px 0;
         width: 240px;
     }
-    
+
     .oneGoal {
-        margin: 0;
+        margin: 0 auto;
         margin-bottom: 1px;
         font-size: 8px;
-        height: 12px;
-        padding-bottom: 0px;
+        width: 120px;
+        height: 10.5px;
+        padding: 3px 0;
+    }
+
+    
+
+    .oneGoal-mobile {
+        height: 0px;
+        margin: 0;
     }
 
     .player-goal-background {
         border: 1px solid black;
     }
 
-    .awayRecord {
-        font-size: 10px;
-        margin-bottom: 5px;
-    }
-
+    .awayRecord,
     .homeRecord {
         font-size: 10px;
         margin-bottom: 5px;
     }
-    
-  }
+
+}

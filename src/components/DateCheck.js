@@ -1,6 +1,9 @@
 import AllGames from "./AllGames"
 import Offseason from "./Offseason"
 import { useEffect } from "react"
+import BG from '../images/honky-rink-vert.png'
+
+import "../CSS/DateCheck.css"
 
 function DateCheck({ setCurrentPage, logos, horns, volume, setVolume }) {
 
@@ -15,6 +18,7 @@ function DateCheck({ setCurrentPage, logos, horns, volume, setVolume }) {
 
     return (
         <>
+            <img id="BI" src={BG} alt="" />
             {hockeySeason() ?
                 <AllGames
                     setCurrentPage={setCurrentPage}
