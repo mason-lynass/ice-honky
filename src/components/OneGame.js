@@ -1,4 +1,5 @@
 import "../CSS/OneGame.css";
+import classNames from 'classnames';
 
 function OneGame({ game, horns, logos }) {
 
@@ -31,11 +32,11 @@ function OneGame({ game, horns, logos }) {
     homeGoals.push(allGoals[i]);
   }
 
-  const mobileScreen = window.matchMedia("(max-width: 500px)")
+  const mobileScreen = window.matchMedia("(max-width: 600px)")
 
   function teamGoals(goals, team) {
     if (mobileScreen.matches) {
-      console.log(goals)
+      // console.log(goals)
       // const sortedGoals = goals.sort((a, b) => b.scorer.seasonTotal - a.scorer.seasonTotal)
       // goals = goals.splice(-3)
       return goals.map((goal) => {
@@ -92,6 +93,7 @@ function OneGame({ game, horns, logos }) {
         )
       } else return (<p className="oneGoal"></p>)
     });
+
   }
 
   // information we can put on the scoreboard:
@@ -122,14 +124,41 @@ function OneGame({ game, horns, logos }) {
     }
   }
 
+  
   function gameGoals() {
+
+    // when the screen is between 600 and 800px the scroll is on gameGoals div
+    // this will apply extra styling if the scroll is happening
+    const gameGoals = "gameGoals";
+    const scrollGameGoals = "scrollGameGoals"
+    const GGClasses = classNames({
+      [gameGoals]: true,
+      [scrollGameGoals]: game.goals.length > 6,
+    });
+    const oneTeamGoals = "oneTeamGoals"
+
+    // when the screen is smaller than 600px  the scroll is on the oneTeamGoals div
+    // this will apply extra styling if scrolling
+    function checkNoOfGoals(team) {
+      return allGoals.filter(goal => goal.team === team).length
+    }
+    const scrollOneTeamGoals = "scrollOneTeamGoals"
+    const OTGAwayClasses = classNames({
+      [oneTeamGoals]: true,
+      [scrollOneTeamGoals]: checkNoOfGoals(game.teams.away.abbreviation) > 3,
+    })
+    const OTGHomeClasses = classNames({
+      [oneTeamGoals]: true,
+      [scrollOneTeamGoals]: checkNoOfGoals(game.teams.home.abbreviation) > 3,
+    })
+
     return (
-      <div className="gameGoals">
-        <div className="oneTeamGoals">
+      <div className={GGClasses}>
+        <div className={OTGAwayClasses}>
           {teamGoals(awayGoals, game.teams.away.abbreviation)}
         </div>
         <hr></hr>
-        <div className="oneTeamGoals">
+        <div className={OTGHomeClasses}>
           {teamGoals(homeGoals, game.teams.home.abbreviation)}
         </div>
       </div>
