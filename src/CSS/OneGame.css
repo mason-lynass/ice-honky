@@ -7,7 +7,7 @@
     min-width: 800px;
     margin: 20px auto;
     position: relative;
-    
+    max-width: 860px;
 }
 
 .oneGame::after {
@@ -162,7 +162,7 @@ hr {
 
     .gameGoals {
         margin: 5px;
-        height: 130px;
+        /* height: 130px; */
         overflow: scroll;
     }
 
