@@ -6,17 +6,29 @@ body {
   background-color: rgb(250, 250, 250);
 }
 
+#BI {
+  min-height: 100%;
+  min-width: 1024px;
+  width: 100%;
+  height: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  opacity: 0;
+}
+
 #title {
   font-family: "Faster One", cursive;
   font-size: 3rem;
-  margin: 0 auto;
+  margin: 20px auto;
 }
 
 .nav-div {
-    margin-top: 24px;
-    display: flex;
-    justify-content: center;
-    gap: 50px;
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+  gap: 50px;
 }
 
 .button-nav-pushable {
@@ -44,7 +56,7 @@ body {
   will-change: transform;
   transform: translateY(2px);
   transition:
-      transform 600ms cubic-bezier(.3, .7, .4, 1);
+    transform 600ms cubic-bezier(.3, .7, .4, 1);
   border-radius: 50%;
 }
 
@@ -56,10 +68,10 @@ body {
   height: 100%;
   border-radius: 50%;
   background: linear-gradient(to left,
-          hsl(0, 6%, 25%) 0%,
-          rgb(94, 91, 92) 8%,
-          hsl(338, 7%, 33%) 92%,
-          hsl(0, 0%, 24%) 100%);
+      hsl(0, 6%, 25%) 0%,
+      rgb(94, 91, 92) 8%,
+      hsl(338, 7%, 33%) 92%,
+      hsl(0, 0%, 24%) 100%);
 }
 
 .button-nav-front {
@@ -73,7 +85,7 @@ body {
   transform: translateY(-13px);
   border-radius: 50%;
   transition:
-      transform 600ms cubic-bezier(.3, .7, .4, 1);
+    transform 600ms cubic-bezier(.3, .7, .4, 1);
 }
 
 .button-nav-pushable:hover {
@@ -84,7 +96,7 @@ body {
 .button-nav-pushable:hover .button-nav-front {
   /* transform: translateY(-20px); */
   transition:
-      transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+    transform 250ms cubic-bezier(.3, .7, .4, 1.5);
 }
 
 .button-nav-pushable:active .button-nav-front {
@@ -95,7 +107,7 @@ body {
 .button-nav-pushable:hover .button-nav-shadow {
   /* transform: translateY(4px); */
   transition:
-      transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+    transform 250ms cubic-bezier(.3, .7, .4, 1.5);
 }
 
 .button-nav-pushable:active .button-nav-shadow {
@@ -111,6 +123,8 @@ body {
   #title {
     font-size: 35px;
   }
+
+  
 }
 
 #soundButton {
@@ -143,6 +157,7 @@ body {
 #soundButton span {
   font-size: .9rem;
   vertical-align: top;
+  color: black;
 }
 
 #soundButton span:first-of-type {
@@ -151,18 +166,20 @@ body {
   margin-top: -10px;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 550px) {
   #soundButton {
 
-      font-size: 1.5rem;
-      width: 70px;
-      height: 62px;
-      border-radius: 12px;
+    font-size: 1.5rem;
+    width: 70px;
+    height: 62px;
+    border-radius: 12px;
   }
+
   #soundButton span {
     font-size: .7rem;
     vertical-align: top;
   }
+
   #soundButton span:first-of-type {
     font-size: 1.5rem;
     margin-bottom: -10px;
