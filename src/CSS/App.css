@@ -169,13 +169,12 @@ body {
 .fixed-button {
   position: fixed;
   top: 0;
-  right: 8px;
+  right: 11px;
   z-index: 1;
 }
 
-@media screen and (max-width: 550px) {
+/* @media screen and (max-width: 550px) {
   #soundButton {
-
     font-size: 1.5rem;
     width: 70px;
     height: 62px;
@@ -191,7 +190,7 @@ body {
     font-size: 1.5rem;
     margin-bottom: -10px;
   }
-}
+} */
 
 /* .activeSoundButton::after {
   content: "   🔊"

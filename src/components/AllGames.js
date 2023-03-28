@@ -69,7 +69,7 @@ function AllGames({ horns, logos, volume, setVolume }) {
     }, [])
 
     function handleScroll() {
-        if (window.pageYOffset > 100) {
+        if (window.pageYOffset > 110) {
             setIsScrolled(true);
         } else {
             setIsScrolled(false);
