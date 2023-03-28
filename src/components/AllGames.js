@@ -14,6 +14,7 @@ function AllGames({ horns, logos, volume, setVolume }) {
     const [recentGoalVisible, setRecentGoalVisible] = useState(false)
     const [teamWGoals, setTeamWGoals] = useState({})
     const [doubleGoalSameTeam, setDoubleGoalSameTeam] = useState(false)
+    const [isScrolled, setIsScrolled] = useState(false)
 
     const volumeRef = useRef(volume)
     volumeRef.current = volume
@@ -66,6 +67,20 @@ function AllGames({ horns, logos, volume, setVolume }) {
             }
         }
     }, [])
+
+    function handleScroll() {
+        if (window.pageYOffset > 100) {
+            setIsScrolled(true);
+        } else {
+            setIsScrolled(false);
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     // to show the team that just scored in a big box,
     // close that big box, and blur behind the box
@@ -242,7 +257,7 @@ function AllGames({ horns, logos, volume, setVolume }) {
 
     function soundButton() {
         return (
-            <button id='soundButton' onClick={handleSoundClick}>
+            <button id="soundButton" className={isScrolled ? "fixed-button" : ""} onClick={handleSoundClick}>
                 {volume ? <span>🔊</span> : <span>🔇</span>}
                 <br></br>
                 <span>Sound on/off</span>
