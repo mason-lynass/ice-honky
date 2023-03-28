@@ -21,7 +21,7 @@ body {
 #title {
   font-family: "Faster One", cursive;
   font-size: 3rem;
-  margin: 20px auto;
+  margin: 8px auto;
 }
 
 .nav-div {
@@ -129,7 +129,7 @@ body {
 
 #soundButton {
   /* position: absolute; */
-  top: 0px;
+  /* top: 0px; */
   /* left: 0px; */
   border: 2px solid black;
   font-family: 'Oswald';
@@ -138,10 +138,10 @@ body {
   margin: 20px;
   border-radius: 20px;
   /* padding: 5px; */
-  font-size: 2rem;
-  margin-bottom: -2px;
+  /* font-size: 2rem; */
+  /* margin-bottom: -2px; */
   transition: background-color .7s;
-  padding: -10px;
+  padding-bottom: 5px;
   margin: 0;
   margin-top: 10px;
 }
@@ -155,13 +155,13 @@ body {
 }
 
 #soundButton span {
-  font-size: .9rem;
+  font-size: 15px;
   vertical-align: top;
   color: black;
 }
 
 #soundButton span:first-of-type {
-  font-size: 2rem;
+  font-size: 32px;
   margin-bottom: -10px;
   margin-top: -10px;
 }
