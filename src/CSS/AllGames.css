@@ -25,6 +25,7 @@
     /* left: 50%; */
     z-index: 5;
     background-color: white;
+    /* height: 70vh; */
     width: 60%;
     margin: 0 20%;
     border: 2px solid black;
@@ -44,16 +45,17 @@
 }
 
 #recentGoal {
-    margin: 70px auto;
+    margin: 5vh auto;
 }
 
 #recentGoal h1 {
-    font-size: 50px;
+    font-size: calc((3 - 1) * 1.2vh + 1rem);
+    margin: 2vh auto;
 }
 
 #recentGoal h3 {
-    margin: 40px auto;
-    font-size: 28px;
+    margin: 3vh auto;
+    font-size: calc((2 - 1) * 1.2vh + 1rem);
 }
 
 #RGClose {
@@ -68,7 +70,7 @@
 }
 
 #RGLogo {
-    width: 50%;
+    width: 40vh;
     margin: -30px;
 }
 
@@ -76,6 +78,7 @@
 #allAssists {
     display: inline;
     margin: 5px;
+    font-size: calc((2 - 1) * 1.2vh + .2rem)
 }
 
 @media screen and (min-width: 1500px) {

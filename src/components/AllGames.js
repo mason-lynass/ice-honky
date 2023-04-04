@@ -14,7 +14,6 @@ function AllGames({ horns, logos, volume, setVolume }) {
     const [recentGoalVisible, setRecentGoalVisible] = useState(false)
     const [teamWGoals, setTeamWGoals] = useState({})
     const [doubleGoalSameTeam, setDoubleGoalSameTeam] = useState(false)
-    const [isScrolled, setIsScrolled] = useState(false)
 
     const volumeRef = useRef(volume)
     volumeRef.current = volume
@@ -56,7 +55,7 @@ function AllGames({ horns, logos, volume, setVolume }) {
     let timeout2
     useEffect(() => {
         const date = new Date()
-        // only do the refresh during hours when games are expected to be happening
+        // only do the refresh at times when games are expected to be happening
         if (date.getUTCHours() <= 8 || date.getUTCHours() >= 17) {
             timeout2 = setTimeout(() => {
                 refresh()
@@ -67,20 +66,6 @@ function AllGames({ horns, logos, volume, setVolume }) {
             }
         }
     }, [])
-
-    function handleScroll() {
-        if (window.pageYOffset > 110) {
-            setIsScrolled(true);
-        } else {
-            setIsScrolled(false);
-        }
-    }
-
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
-
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
 
     // to show the team that just scored in a big box,
     // close that big box, and blur behind the box
@@ -108,7 +93,7 @@ function AllGames({ horns, logos, volume, setVolume }) {
 
                     // you can use this one to test multiple goals
                     // let freshGoalsArray = [['TOR', 5], ['TOR', 4]]
-                    let freshGoalsArray = []
+                    let freshGoalsArray = [['SEA', 8]]
                     setScores(scores)
                     console.log("additional fetch!")
 
@@ -257,7 +242,7 @@ function AllGames({ horns, logos, volume, setVolume }) {
 
     function soundButton() {
         return (
-            <button id="soundButton" className={isScrolled ? "fixed-button" : ""} onClick={handleSoundClick}>
+            <button id='soundButton' onClick={handleSoundClick}>
                 {volume ? <span>🔊</span> : <span>🔇</span>}
                 <br></br>
                 <span>Sound on/off</span>
