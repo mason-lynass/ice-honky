@@ -92,7 +92,7 @@ function AllGames({ horns, logos, volume, setVolume }) {
                 r.json().then((scores) => {
 
                     // you can use this one to test multiple goals
-                    // let freshGoalsArray = [['TOR', 5], ['TOR', 4]]
+                    // let freshGoalsArray = [['DAL', 5]]
                     let freshGoalsArray = []
                     setScores(scores)
                     console.log("additional fetch!")

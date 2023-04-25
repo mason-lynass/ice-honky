@@ -35,7 +35,7 @@ function OneGame({ game, horns, logos }) {
 
   function teamGoals(goals, team) {
     if (mobileScreen.matches) {
-      console.log(goals)
+      // console.log(goals)
       // const sortedGoals = goals.sort((a, b) => b.scorer.seasonTotal - a.scorer.seasonTotal)
       // goals = goals.splice(-3)
       return goals.map((goal) => {
@@ -146,6 +146,12 @@ function OneGame({ game, horns, logos }) {
     return `${team} logo`
   }
 
+  function showTies(teamTies) {
+    if (teamTies) {
+      return `-${teamTies}`
+    }
+  }
+
   return (
     <div className="oneGame">
       <div className="infoFlex">
@@ -159,7 +165,7 @@ function OneGame({ game, horns, logos }) {
             className="awayLogo"
           />
           <p className="awayRecord">
-            {awayRecord[0]}-{awayRecord[1]}-{awayRecord[2]}
+            {awayRecord[0]}-{awayRecord[1]}{showTies(awayRecord[2])}
           </p>
           {/* <div className="oneTeamGoals">{teamGoals(awayGoals)}</div> */}
         </div>
@@ -186,7 +192,7 @@ function OneGame({ game, horns, logos }) {
             alt={logoAltText(game.teams.home.abbreviation)}
           />
           <p className="homeRecord">
-            {homeRecord[0]}-{homeRecord[1]}-{homeRecord[2]}
+            {homeRecord[0]}-{homeRecord[1]}{showTies(awayRecord[2])}
           </p>
           {/* <div className="oneTeamGoals">{teamGoals(homeGoals)}</div> */}
         </div>
