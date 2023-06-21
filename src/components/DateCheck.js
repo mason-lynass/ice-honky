@@ -13,8 +13,11 @@ function DateCheck({ setCurrentPage, logos, horns, volume, setVolume }) {
 
     function hockeySeason() {
         const date = new Date()
-        return date.getMonth() < 6 || date.getMonth() > 8
+        console.log(date.getMonth())
+        return date.getMonth() < 5 || date.getMonth() > 8
     }
+
+
 
     return (
         <>
