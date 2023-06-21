@@ -13,3 +13,26 @@
       } */
 }
 
+main {
+  width: 90vw;
+  margin: 0 5vw;
+}
+
+main hr {
+  color: black;
+  opacity: 1;
+  width: 20vw;
+  margin: 5vw 35vw;
+}
+
+#in-season {
+  width: calc(80vw - 20px);
+  height: calc((80vw - 20px) * (413/494));
+  border: 10px ridge goldenrod;
+  margin: 3vw 0;
+}
+
+#made-by {
+  margin-top: 10vw;
+}
+
