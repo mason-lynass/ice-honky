@@ -9,15 +9,7 @@ This website uses the [NHL Score API](https://github.com/peruukki/nhl-score-api)
 Feel free to clone this repo to run Ice Honky on your computer - you could change things to only display certain teams, or change the API polling rate (but please don't make it poll too often, we don't want to be too expensive!).
 
 `
-
-git clone git@github.com:mason-lynass/ice-honky.git
-
-cd ice-honky
-
-npm install
-
-npm start
-
+git clone git@github.com:mason-lynass/ice-honky.git => cd ice-honky => npm install => npm start
 `
 
 ## Credits
