@@ -15,5 +15,7 @@ git clone git@github.com:mason-lynass/ice-honky.git => cd ice-honky => npm insta
 ## Credits
 
 Ice Honky is developed and maintained by the Shoreline Community Choir:
+
 Alex Naughton - https://lexdotcom.com
+
 Mason Lynass - https://masonlynass.com
