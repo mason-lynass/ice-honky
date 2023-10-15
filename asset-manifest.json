@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.38d222b5.css",
-    "main.js": "/static/js/main.4ebc1f6b.js",
+    "main.js": "/static/js/main.8d075cc7.js",
     "static/js/845.64a24dcb.chunk.js": "/static/js/845.64a24dcb.chunk.js",
     "static/js/787.1fb76357.chunk.js": "/static/js/787.1fb76357.chunk.js",
     "static/media/ice-honky-in-season.png": "/static/media/ice-honky-in-season.fe550f2fe5cdf749913d.png",
@@ -74,12 +74,12 @@
     "index.html": "/index.html",
     "static/media/TBL.svg": "/static/media/TBL.5b51181db7cebd22c99b.svg",
     "main.38d222b5.css.map": "/static/css/main.38d222b5.css.map",
-    "main.4ebc1f6b.js.map": "/static/js/main.4ebc1f6b.js.map",
+    "main.8d075cc7.js.map": "/static/js/main.8d075cc7.js.map",
     "845.64a24dcb.chunk.js.map": "/static/js/845.64a24dcb.chunk.js.map",
     "787.1fb76357.chunk.js.map": "/static/js/787.1fb76357.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.38d222b5.css",
-    "static/js/main.4ebc1f6b.js"
+    "static/js/main.8d075cc7.js"
   ]
 }
