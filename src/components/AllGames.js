@@ -44,7 +44,7 @@ function AllGames({ horns, logos, volume, setVolume }) {
                         sortedGoalsObject[team] = goalsObject[team]
                     })
 
-                    console.log('initial fetch!')
+                    // console.log('initial fetch!')
                 })
             }
         })
@@ -95,7 +95,7 @@ function AllGames({ horns, logos, volume, setVolume }) {
                     // let freshGoalsArray = [['DAL', 5]]
                     let freshGoalsArray = []
                     setScores(scores)
-                    console.log("additional fetch!")
+                    // console.log("additional fetch!")
 
                     let updateObject = {}
                     let sorted = []
@@ -136,7 +136,7 @@ function AllGames({ horns, logos, volume, setVolume }) {
                         } else {
                             setRecentGoalVisible(false)
                             behind.classList.remove("behindBlur")
-                            console.log(team, "didn't score since last check")
+                            // console.log(team, "didn't score since last check")
                         }
                         teamIdx = teamIdx + 1
                     }

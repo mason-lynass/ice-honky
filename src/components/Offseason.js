@@ -21,7 +21,7 @@ function Offseason( {setCurrentPage} ) {
                 <h1>Welcome to IceHonky.net!</h1>
                 <h2>Your home for NHL scores and audio score alerts, with goal horns!</h2>
             </div>
-            <hr></hr>
+            <hr id='offseason-hr'></hr>
             <div>
                 <h3>It's the offseason, and there aren't any games right now, so this homepage will look pretty empty until games start back up in October</h3>
                 <p>During the season, we're polling an NHL Scores API and using that data to display scores and game info like this:</p>
