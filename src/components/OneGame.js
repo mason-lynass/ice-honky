@@ -192,7 +192,7 @@ function OneGame({ game, horns, logos }) {
             alt={logoAltText(game.teams.home.abbreviation)}
           />
           <p className="homeRecord">
-            {homeRecord[0]}-{homeRecord[1]}{showTies(awayRecord[2])}
+            {homeRecord[0]}-{homeRecord[1]}{showTies(homeRecord[2])}
           </p>
           {/* <div className="oneTeamGoals">{teamGoals(homeGoals)}</div> */}
         </div>
