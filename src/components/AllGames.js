@@ -277,7 +277,9 @@ function AllGames({ horns, logos, volume, setVolume }) {
                         {AllTheGames()}
                     </div>
                     :
-                    <h2>loading...</h2>}
+                    // <h2>loading...</h2>
+                    <h2 style={{textAlign: 'center'}}>The NHL recently switched to a new API, so we are taking some time to rework the site using the new official API. Thanks for your patience!</h2>
+                    }
             </div>
         </main>
     )
