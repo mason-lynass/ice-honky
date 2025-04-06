@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.38d222b5.css",
-    "main.js": "/static/js/main.becd41f1.js",
+    "main.css": "/static/css/main.452bd84e.css",
+    "main.js": "/static/js/main.06512dc2.js",
     "static/js/845.64a24dcb.chunk.js": "/static/js/845.64a24dcb.chunk.js",
     "static/js/787.1fb76357.chunk.js": "/static/js/787.1fb76357.chunk.js",
     "static/media/ice-honky-in-season.png": "/static/media/ice-honky-in-season.fe550f2fe5cdf749913d.png",
@@ -49,6 +49,7 @@
     "static/media/PIT.svg": "/static/media/PIT.13ffe5b71d63fc93b837.svg",
     "static/media/SJS.svg": "/static/media/SJS.f5b71e31aea1f29b4a74.svg",
     "static/media/NYI.svg": "/static/media/NYI.91c84681b94b0bf0790d.svg",
+    "static/media/UTA.svg": "/static/media/UTA.d44ded90a2ea915605f9.svg",
     "static/media/OTT.svg": "/static/media/OTT.dae6d485620b45fba1e8.svg",
     "static/media/VAN.svg": "/static/media/VAN.31ee23293d263c390078.svg",
     "static/media/EDM.svg": "/static/media/EDM.1f050360f02a9bf694d0.svg",
@@ -73,13 +74,13 @@
     "static/media/PHI.svg": "/static/media/PHI.589b2bcf7fcdc1fe6e83.svg",
     "index.html": "/index.html",
     "static/media/TBL.svg": "/static/media/TBL.5b51181db7cebd22c99b.svg",
-    "main.38d222b5.css.map": "/static/css/main.38d222b5.css.map",
-    "main.becd41f1.js.map": "/static/js/main.becd41f1.js.map",
+    "main.452bd84e.css.map": "/static/css/main.452bd84e.css.map",
+    "main.06512dc2.js.map": "/static/js/main.06512dc2.js.map",
     "845.64a24dcb.chunk.js.map": "/static/js/845.64a24dcb.chunk.js.map",
     "787.1fb76357.chunk.js.map": "/static/js/787.1fb76357.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.38d222b5.css",
-    "static/js/main.becd41f1.js"
+    "static/css/main.452bd84e.css",
+    "static/js/main.06512dc2.js"
   ]
 }
