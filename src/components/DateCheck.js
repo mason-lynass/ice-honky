@@ -17,8 +17,6 @@ function DateCheck({ setCurrentPage, logos, horns, volume, setVolume }) {
         return date.getMonth() < 5 || date.getMonth() > 8
     }
 
-
-
     return (
         <>
             {hockeySeason() ?
