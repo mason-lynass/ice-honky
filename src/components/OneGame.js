@@ -6,8 +6,6 @@ function OneGame({ game, horns, logos }) {
   // including recordsObjects and Records
   // findLogo function
 
-  console.log(game)
-
   // score
   const scoreArray = game.scores;
 

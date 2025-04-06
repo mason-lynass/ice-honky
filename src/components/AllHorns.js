@@ -44,13 +44,13 @@ function AllHorns({ horns, logos, setCurrentPage }) {
   const centralHorns = Object.fromEntries(
     Object.entries(horns).filter(
       ([key]) =>
-        key === "ARI" ||
         key === "CHI" ||
         key === "COL" ||
         key === "DAL" ||
         key === "MIN" ||
         key === "NSH" ||
         key === "STL" ||
+        key === "UTA" ||
         key === "WPG"
     )
   );
@@ -100,13 +100,13 @@ function AllHorns({ horns, logos, setCurrentPage }) {
   const centralLogos = Object.fromEntries(
     Object.entries(logos).filter(
       ([key]) =>
-        key === "ARI" ||
         key === "CHI" ||
         key === "COL" ||
         key === "DAL" ||
         key === "MIN" ||
         key === "NSH" ||
         key === "STL" ||
+        key === "UTA" ||
         key === "WPG"
     )
   );
@@ -129,7 +129,6 @@ function AllHorns({ horns, logos, setCurrentPage }) {
     return Object.entries(logos).map((logo) => {
       const hornArray = Object.entries(horns).filter((horn) => horn[0] === logo[0]);
         const horn = hornArray[0][1]
-        console.log(hornArray)
       return <HornButton logo={logo} horn={horn} key={logo[0]} />;
     });
   }
